@@ -1,0 +1,31 @@
+{
+  "name": "livenup",
+  "version": "1.0.0",
+  "description": "an application to track your plants",
+  "main": "index.js",
+  "dependencies": {
+    "express": "4.13.4",
+    "history": "^1.17.0",
+    "mongodb": "^2.1.4",
+    "mongoose": "^4.3.7",
+    "react": "^0.14.6",
+    "react-router": "^1.0.3",
+    "react-router-redux": "^2.1.0",
+    "redux": "^3.0.6",
+    "router": "^1.1.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LivenUp/livenup.git"
+  },
+  "author": "reaction-jackson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LivenUp/livenup/issues"
+  },
+  "homepage": "https://github.com/LivenUp/livenup#readme"
+}
