@@ -21,15 +21,25 @@ module.exports = {  //add expires to payload, then check against
     });
       return promise;
   },
-  
+
   checkUser(req, res, next){
     const token = req.header.token;
     const decoded = jwt.decode(toke, seceret);
 
     if(decoded.payload.scope === scope){
-      next(true);
+      next();
     }
     else{ throw new Error('invalid token') }
+  },
+
+  addUser(req, res){
+    const user = req.body.user.username;
+    const email = req.body.user.email;
+    const password = bcrypt(req.body.user.password);
+
+    //call database function to submit user info
+    //redirect to login
+
   }
 
 };
