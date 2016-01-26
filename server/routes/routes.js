@@ -22,9 +22,9 @@ router.post('/signup', (req, res) => {
   auth.signUp(req, res);
 });
 
-router.use('/plots', plots);
+router.use('/plot', plots);
 router.use('/api', api);
-router.use('/plants', plants);
+router.use('/plant', plants);
 router.use('/user', users);
 
 
