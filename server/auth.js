@@ -1,6 +1,5 @@
 import { jwt } from 'jwt-simple';
-import { secret } from ('./utilities').salt;
-import { scope } from ('./utilities').scope;
+import { secret } from './utilities';
 import { bcrypt } from 'bcrypt';
 
 module.exports = {  //add expires to payload, then check against
@@ -13,8 +12,8 @@ module.exports = {  //add expires to payload, then check against
       //should then call a database function which returns the hashed password
       //then call bcrypt.compare to see if the user exists
         //if they do - return a token
-          const payload = {user: user, email: email, scope: scope};
-          const token = jwt.encode(payload, secret);
+          const payload = {user: user, email: email, scope: secret.scope};
+          const token = jwt.encode(payload, secret.salt);
           resolve(token);
         //else reject and redirect
           reject();
@@ -24,12 +23,12 @@ module.exports = {  //add expires to payload, then check against
 
   checkUser(req, res, next){
     const token = req.header.token;
-    const decoded = jwt.decode(toke, seceret);
+    const decoded = jwt.decode(toke, seceret.salt);
 
-    if(decoded.payload.scope === scope){
+    if(decoded.payload.scope === secret.scope){
       next();
     }
-    else{ throw new Error('invalid token') }
+    else{ throw new Error('invalid token') };
   },
 
   addUser(req, res){
