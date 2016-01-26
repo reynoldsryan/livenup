@@ -9,9 +9,9 @@ class NavBar extends Component {
     return (
     <Navbar inverse>
       <Navbar.Header>
-        <Navbar.Brand>
-          <a href='#'>LivenUp</a>
-        </Navbar.Brand>
+        <LinkContainer to={{ pathname: '/' }}>
+          <Navbar.Brand>LivenUp</Navbar.Brand>
+        </LinkContainer>
         <Navbar.Toggle />
       </Navbar.Header>
       <Navbar.Collapse>
