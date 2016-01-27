@@ -6,24 +6,14 @@ import { Router, Route, browserHistory } from 'react-router';
 import { syncHistory } from 'react-router-redux';
 import ReduxPromise from 'redux-promise';
 
-import App from './components/app';
-import Profile from './components/profile';
-import MyPlants from './components/myplants';
 import reducers from './reducers';
+import routes from './routes';
 
-const history = browserHistory;
-const middleware = syncHistory(history);
-const createStoreWithMiddleware = compose(applyMiddleware(middleware, ReduxPromise), window.devToolsExtension ? window.devToolsExtension() : f => f)(createStore);
+const reduxRouterMiddleware = syncHistory(browserHistory);
+const createStoreWithMiddleware = compose(applyMiddleware(ReduxPromise, reduxRouterMiddleware), window.devToolsExtension ? window.devToolsExtension() : f => f)(createStore);
 const store = createStoreWithMiddleware(reducers);
 
 ReactDOM.render(
   <Provider store={store}>
-    <div>
-      <Router history={history}>
-        <Route path='/' component={App}>
-          <Route path='myplants' component={MyPlants} />
-          <Route path='profile' component={Profile} />
-        </Route>
-      </Router>
-    </div>
+    <Router history={browserHistory} routes={routes} />
   </Provider>, document.querySelector('.container-fluid'));

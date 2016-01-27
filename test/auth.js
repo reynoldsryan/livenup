@@ -11,13 +11,12 @@ module.exports = { //add expires to payload, then check against
   login: function login(req, res) {
     var promise = new Promise(function (resolve, reject) {
       var user = req.body.user.username;
-      var email = req.body.user.email;
       var password = _bcrypt(req.body.user.password);
 
       //should then call a database function which returns the hashed password
       //then call bcrypt.compare to see if the user exists
       //if they do - return a token
-      var payload = { user: user, email: email, scope: _utilities.scope };
+      var payload = { user: user, scope: _utilities.scope };
       var token = _jwtSimple.encode(payload, _utilities.salt);
       resolve(token);
       //else reject and redirect
