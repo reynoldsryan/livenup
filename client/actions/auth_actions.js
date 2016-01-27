@@ -1,7 +1,11 @@
 import axios from 'axios';
 
-export function signupUser(email, password) {
+export const SIGNUP_USER = 'SIGNUP_USER';
+export const LOGIN_USER = 'LOGIN_USER';
+
+export function signupUser(username, email, password) {
   const request = axios.post('/signup', {
+    username: username,
     email: email,
     password: password
   });
@@ -12,9 +16,9 @@ export function signupUser(email, password) {
   };
 }
 
-export function loginUser(email, password) {
+export function loginUser(username, password) {
   const request = axios.post('/login', {
-    email: email,
+    username: username,
     password: password
   });
 

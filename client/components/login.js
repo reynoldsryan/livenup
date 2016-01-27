@@ -4,19 +4,19 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { loginUser } from '../actions/auth_actions';
 
-export default class LoginForm extends Component {
+class LoginForm extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {email: '', password: ''};
+    this.state = {username: '', password: ''};
 
-    this.onEmailChange = this.onEmailChange.bind(this);
+    this.onUsernameChange = this.onUsernameChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
-  onEmailChange(event) {
-    this.setState({ email: event.target.value });
+  onUsernameChange(event) {
+    this.setState({ username: event.target.value });
   }
 
   onPasswordChange(event) {
@@ -24,39 +24,39 @@ export default class LoginForm extends Component {
   }
 
   onFormSubmit(event) {
+    console.log(event);
     event.preventDefault();
-    this.props.loginUser(this.state.email, this.state.password);
-    this.setState({ email: '', password: '' });
+    this.props.loginUser(this.state.username, this.state.password);
+    this.setState({ username: '', password: '' });
   }
 
   render() {
-    const { errorMessage } = this.props;
 
     return (
       <div>
         <PageHeader>Log In</PageHeader>
         <form onSubmit={this.onFormSubmit}>
           <Input
-            type='email'
-            label='Email Address'
-            placeholder='Enter your email'
-            value={this.state.email}
-            onChange={this.onEmailChange} />
+            type='text'
+            label='Username'
+            placeholder='Enter your username'
+            value={this.state.username}
+            onChange={this.onUsernameChange} />
           <Input
             type='password'
             label='Password'
             placeholder='Enter your password'
             value={this.state.password}
             onChange={this.onPasswordChange} />
-          <ButtonInput bsStyle='primary' value="Submit" />
+          <ButtonInput type='submit' bsStyle='primary' value="Submit" />
         </form>
       </div>
     );
   }
 }
 
-  function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ loginUser }, dispatch);
-  }
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ loginUser }, dispatch);
+}
 
-  export default connect(null, mapDispatchToProps)(LoginForm);
+export default connect(null, mapDispatchToProps)(LoginForm);
