@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
 import { PageHeader, Input, ButtonInput } from 'react-bootstrap';
-<<<<<<< HEAD
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { signupUser } from '../actions/auth_actions';
 
-export default class SignupForm extends Component {
+class SignupForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {email: '', password: ''};
 
+    this.onUsernameChange = this.onUsernameChange.bind(this);
     this.onEmailChange = this.onEmailChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
+  }
+
+  onUsernameChange(event) {
+    this.setState({ username: event.target.value });
   }
 
   onEmailChange(event) {
@@ -31,12 +35,17 @@ export default class SignupForm extends Component {
   }
 
   render() {
-    const { errorMessage } = this.props;
 
     return (
       <div>
         <PageHeader>Sign Up</PageHeader>
         <form onSubmit={this.onFormSubmit}>
+          <Input
+            type='text'
+            label='Username'
+            placeholder='Enter your username'
+            value={this.state.username}
+            onChange={this.onUsernameChange} />
           <Input
             type='email'
             label='Email Address'
@@ -51,29 +60,13 @@ export default class SignupForm extends Component {
             onChange={this.onPasswordChange} />
           <ButtonInput bsStyle='primary' value="Submit" />
         </form>
-=======
-
-export default class Login extends Component {
-  render() {
-    return (
-      <div>
-        <PageHeader>Log In</PageHeader>
-        <form>
-          <Input label='Email Address' placeholder='Enter your email' />
-          <Input label='Password' placeholder='Enter your password' />
-          <ButtonInput type="submit" value="Submit" />
-          </form>
->>>>>>> 1458068702285c99997a2752d627d326e712f3a7
       </div>
     );
   }
 }
-<<<<<<< HEAD
 
   function mapDispatchToProps(dispatch) {
     return bindActionCreators({ signupUser }, dispatch);
   }
 
   export default connect(null, mapDispatchToProps)(SignupForm);
-=======
->>>>>>> 1458068702285c99997a2752d627d326e712f3a7
