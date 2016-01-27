@@ -7,7 +7,6 @@ import Profile from './components/profile';
 import Login from './components/login';
 import Signup from './components/signup';
 
-
 export default (
 <Route path='/' component={App}>
   <Route path='myplants' component={MyPlants} />
