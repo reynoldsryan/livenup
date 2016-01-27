@@ -13,19 +13,22 @@ class Planner extends Component {
     this.state = {
       counter: 1
     };
+
     this.handleAddPlot = this.handleAddPlot.bind(this);
     this.renderPlots = this.renderPlots.bind(this);
   }
 
   componentWillMount() {
-    this.props.fetchUserPlots();
+      if(!this.props.fetched) {
+        this.props.fetchUserPlots();
+      }
     console.log('component will mount');
   }
 
   renderPlots(plot) {
     console.warn('Rendering plots');
     console.log('plot in planner',plot)
-    return <Plot plot={plot} />;
+    return <Plot key={plot.name} plot={plot} />;
   }
 
   handleAddPlot(e) {
@@ -58,7 +61,7 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps({ userPlots }) {
   if(userPlots) {
-    return { plots: userPlots.plots };
+    return { plots: userPlots.plots, fetched: true };
   }
   // console.log('plots state', userPlots)
   return { plots: []  };
