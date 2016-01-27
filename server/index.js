@@ -1,8 +1,8 @@
-var espress = require('express');
-var app = express();
-var routes = require('./routes.js');
-var bodyParser = require('body-parser');
-var PORT = 3000;
+import { express } from 'express';
+import { routes } from './routes/routes.js';
+import { bodyParser } from 'body-parser';
+const app = express();
+const PORT = 3000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extend: true}));
