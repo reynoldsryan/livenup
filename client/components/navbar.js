@@ -4,6 +4,10 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { routeActions } from 'react-router-redux';
 import { connect } from 'react-redux';
 
+import { signupUser } from '../actions/signup_actions';
+import { loginUser } from '../actions/login_actions';
+
+
 class NavBar extends Component {
   render() {
     return (
@@ -24,12 +28,15 @@ class NavBar extends Component {
           </LinkContainer>
         </Nav>
         <Nav pullRight>
-          <NavDropdown eventKey={3} title='SignIn' id='basic-nav-dropdown'>
-            <MenuItem eventKey={3.1}>Sign In with Facebook</MenuItem>
-            <MenuItem eventKey={3.2}>Sign In with Google</MenuItem>
+          <NavDropdown eventKey={3} title='Log In' id='basic-nav-dropdown'>
+            <MenuItem eventKey={3.1}>Log In with Facebook</MenuItem>
+            <MenuItem eventKey={3.2}>Log In with Google</MenuItem>
             <MenuItem divider />
-            <LinkContainer to={{ pathname: '/signin' }}>
-              <MenuItem eventKey={3.3}>Sign In</MenuItem>
+            <LinkContainer to={{ pathname: '/login' }}>
+              <MenuItem eventKey={3.3}>Log In</MenuItem>
+            </LinkContainer>
+            <LinkContainer to={{ pathname: '/signup' }}>
+              <MenuItem eventKey={3.4}>Sign Up</MenuItem>
             </LinkContainer>
           </NavDropdown>
         </Nav>
