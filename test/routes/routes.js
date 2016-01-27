@@ -12,7 +12,23 @@ var _users = require('./users');
 
 var router = _express.Router();
 
+router.get('',function(req,res){
+  console.log(__dirname.slice(0,-11))
+  res.sendFile(__dirname.slice(0,-11)+'index.html');
+});
+router.get('/bundle.js',function(req,res){
+  console.log(__dirname.slice(0,-11))
+  res.sendFile(__dirname.slice(0,-11)+'bundle.js');
+});
+router.get('/node_modules/bootstrap/dist/css/bootstrap.css',function(req,res){
+  console.log(__dirname.slice(0,-11))
+  res.sendFile(__dirname.slice(0,-11)+'/node_modules/bootstrap/dist/css/bootstrap.css');
+});
+
 router.post('/login', function (req, res) {
+  console.log('req.body',req.body);
+  console.log('req.headers',req.headers);
+
   _auth.login(req, res).then(function (token) {
     res.set('token', token);
     res.sendStatus(200);

@@ -8,7 +8,7 @@ class SignupForm extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {email: '', password: ''};
+    this.state = {username: '', email: '', password: ''};
 
     this.onUsernameChange = this.onUsernameChange.bind(this);
     this.onEmailChange = this.onEmailChange.bind(this);
@@ -29,9 +29,10 @@ class SignupForm extends Component {
   }
 
   onFormSubmit(event) {
+    console.log(event);
     event.preventDefault();
-    this.props.signupUser(this.state.email, this.state.password);
-    this.setState({ email: '', password: '' });
+    this.props.signupUser(this.state.username, this.state.email, this.state.password);
+    this.setState({ username: '', email: '', password: '' });
   }
 
   render() {
@@ -49,7 +50,7 @@ class SignupForm extends Component {
           <Input
             type='email'
             label='Email Address'
-            placeholder='Enter your email'
+            placeholder='Enter your email address'
             value={this.state.email}
             onChange={this.onEmailChange} />
           <Input
@@ -58,7 +59,7 @@ class SignupForm extends Component {
             placeholder='Enter your password'
             value={this.state.password}
             onChange={this.onPasswordChange} />
-          <ButtonInput bsStyle='primary' value="Submit" />
+          <ButtonInput type='submit' bsStyle='primary' value="Submit" />
         </form>
       </div>
     );
