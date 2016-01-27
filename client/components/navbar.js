@@ -4,6 +4,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { routeActions } from 'react-router-redux';
 import { connect } from 'react-redux';
 
+
 class NavBar extends Component {
   render() {
     return (

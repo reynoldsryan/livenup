@@ -33,7 +33,6 @@ class SignupForm extends Component {
     event.preventDefault();
     this.props.signupUser(this.state.username, this.state.email, this.state.password);
     this.setState({ username: '', email: '', password: '' });
-  }
 
   render() {
 
