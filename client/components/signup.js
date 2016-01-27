@@ -4,15 +4,20 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { signupUser } from '../actions/auth_actions';
 
-export default class SignupForm extends Component {
+class SignupForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {email: '', password: ''};
 
+    this.onUsernameChange = this.onUsernameChange.bind(this);
     this.onEmailChange = this.onEmailChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
+  }
+
+  onUsernameChange(event) {
+    this.setState({ username: event.target.value });
   }
 
   onEmailChange(event) {
@@ -30,12 +35,17 @@ export default class SignupForm extends Component {
   }
 
   render() {
-    const { errorMessage } = this.props;
 
     return (
       <div>
         <PageHeader>Sign Up</PageHeader>
         <form onSubmit={this.onFormSubmit}>
+          <Input
+            type='text'
+            label='Username'
+            placeholder='Enter your username'
+            value={this.state.username}
+            onChange={this.onUsernameChange} />
           <Input
             type='email'
             label='Email Address'
