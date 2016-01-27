@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { PageHeader, Input, ButtonInput } from 'react-bootstrap';
+<<<<<<< HEAD
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { signupUser } from '../actions/auth_actions';
@@ -50,13 +51,29 @@ export default class SignupForm extends Component {
             onChange={this.onPasswordChange} />
           <ButtonInput bsStyle='primary' value="Submit" />
         </form>
+=======
+
+export default class Login extends Component {
+  render() {
+    return (
+      <div>
+        <PageHeader>Log In</PageHeader>
+        <form>
+          <Input label='Email Address' placeholder='Enter your email' />
+          <Input label='Password' placeholder='Enter your password' />
+          <ButtonInput type="submit" value="Submit" />
+          </form>
+>>>>>>> 1458068702285c99997a2752d627d326e712f3a7
       </div>
     );
   }
 }
+<<<<<<< HEAD
 
   function mapDispatchToProps(dispatch) {
     return bindActionCreators({ signupUser }, dispatch);
   }
 
   export default connect(null, mapDispatchToProps)(SignupForm);
+=======
+>>>>>>> 1458068702285c99997a2752d627d326e712f3a7
