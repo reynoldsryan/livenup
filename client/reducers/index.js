@@ -1,8 +1,7 @@
 import { combineReducers } from 'redux';
 import { routeReducer } from 'react-router-redux';
 import PlotsReducer from './reducer_plots';
-import loginReducer from './login_reducer';
-import signupReducer from './signup_reducer';
+import { loginReducer, signupReducer } from './auth_reducers';
 
 const rootReducer = combineReducers({
   routing: routeReducer,
