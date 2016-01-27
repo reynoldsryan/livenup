@@ -9,6 +9,11 @@ var _bodyParser = require('body-parser');
 var app = _express();
 var PORT = 3000;
 
+var _mongoose = require('mongoose');
+
+_mongoose.connect('mongodb://chuck:1qaz2wsx3edc4rfv@ds051595.mongolab.com:51595/heroku_d6g9mbk4');
+console.log('mongoose connection', _mongoose.connection.readyState);
+
 app.use(_bodyParser.json());
 app.use(_bodyParser.urlencoded({ extend: true }));
 

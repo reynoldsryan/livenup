@@ -7,6 +7,7 @@ var _auth = require('./../auth');
 var router = _express.Router();
 
 router.route('/', _auth.checkUser).get(function (req, res) {
+  res.send('in route /plots GET');
   var user = req.body.user.username;
   //calls database and return list of plots and plants based on user
   console.log('in route /plots GET');
@@ -30,6 +31,7 @@ router.route('/', _auth.checkUser).get(function (req, res) {
 router.route('/plant', _auth.checkUser).get(function (req, res) {
   var plant = req.body.plant;
   //calls database function to return info on plant;
+  res.send('in route /plots/plants GET');
   console.log('in route /plots/plants GET');
 }).post(function (req, res) {
   var plant = req.body.plant;
