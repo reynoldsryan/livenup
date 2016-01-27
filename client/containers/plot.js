@@ -34,7 +34,7 @@ class Plot extends Component {
   listView() {
     const plants = this.props.plot.plants.map((plant) => {
       return (
-        <tr>
+        <tr key={plant.name}>
           <td>{plant.name}</td>
           <td>{plant.description || 'Default plant description'}</td>
           <td>something</td>
@@ -104,12 +104,8 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ addPlant, removePlant, removePlot, renamePlot }, dispatch);
 }
 
-// function mapStateToProps({ userPlots }) {
-//   if(userPlots) {
-//     return { plots: userPlots.plots };
-//   }
-//   // console.log('plots state', userPlots)
-//   return { plots: []  };
-// }
+function mapStateToProps({ userPlots }) {
+  return { userPlots };
+}
 export default connect(null, mapDispatchToProps)(Plot);
 // export default connect(mapStateToProps, mapDispatchToProps)(Planner);
