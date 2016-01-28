@@ -1,4 +1,6 @@
-import { mongoose } from 'mongoose';
+'use strict';
+
+const mongoose = require('mongoose');
 
 const plotSchema = new mongoose.Schema( {
   name: {type: String},

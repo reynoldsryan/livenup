@@ -2,7 +2,7 @@
 
 var _express = require('express');
 
-var _auth = require('./../auth');
+var _auth = require('./auth');
 
 var _plots = require('./plots');
 
@@ -10,10 +10,11 @@ var _plants = require('./plants');
 
 var _users = require('./users');
 
-var router = _express.express.Router();
+var router = _express.Router();
 
 router.post('/login', function (req, res) {
-  _auth.auth.login(req, res).then(function (token) {
+  _auth.login(req, res)
+  .then(function (token) {
     res.set('token', token);
     res.sendStatus(200);
   }).catch(function () {
@@ -22,12 +23,11 @@ router.post('/login', function (req, res) {
 });
 
 router.post('/signup', function (req, res) {
-  _auth.auth.signUp(req, res);
+  _auth.addUser(req, res);
 });
 
-router.use('/plot', _plots.plots);
-router.use('/api', api);
-router.use('/plant', _plants.plants);
-router.use('/user', _users.users);
+router.use('/plot', _plots);
+router.use('/plant', _plants);
+router.use('/user', _users);
 
 module.exports = router;

@@ -2,14 +2,14 @@
 
 var _mongoose = require('mongoose');
 
-var userSchema = new _mongoose.mongoose.Schema({
+var userSchema = new _mongoose.Schema({
   email: { type: String },
   password: { type: String },
   name: { type: String },
   location: { type: String }
 });
 
-var User = _mongoose.mongoose.model('User', userSchema);
+var User = _mongoose.model('User', userSchema);
 
 module.exports = {
   find: function find(email, callback) {
@@ -18,7 +18,7 @@ module.exports = {
       callback(result);
     });
   },
-  add: function add(email, password, name, location) {
+  add: function add(email, password, name, location, callback) {
     var user = new User({
       email: email,
       password: password,

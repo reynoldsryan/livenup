@@ -1,7 +1,9 @@
-import { express } from 'express';
-import { routes } from './routes/routes.js';
-import { bodyParser } from 'body-parser';
-import { mongoose } from 'mongoose';
+'use strict';
+
+const express = require('express');
+const routes = require('./routes/routes.js');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://chuck:1qaz2wsx3edc4rfv@ds051595.mongolab.com:51595/heroku_d6g9mbk4');
 console.log(mongoose.connection.readyState);
