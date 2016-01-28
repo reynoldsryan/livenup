@@ -2,17 +2,17 @@
 
 var _express = require('express');
 
-var _auth = require('./../auth');
+var _auth = require('./auth');
 
 var _plots = require('../../database/plots');
 
-var router = _express.express.Router();
+var router = _express.Router();
 
-router.route('/', _auth.auth.checkUser).get(function (req, res) {
+router.route('/', _auth.checkUser).get(function (req, res) {
   console.log('ln 9: in route/plots GET');
   var user = req.body.user;
 
-  _plots.plot.find(user, function (data) {
+  _plots.find(user, function (data) {
     res.send(data);
   });
 }).post(function (req, res) {
@@ -23,7 +23,7 @@ router.route('/', _auth.auth.checkUser).get(function (req, res) {
   var plants = req.body.plot.plants;
   var user = req.body.user.email;
 
-  plot.add(name, length, width, plants, user, function (data) {
+  _plots.add(name, length, width, plants, user, function (data) {
     res.send(data);
   });
 }).put(function (req, res) {
@@ -34,7 +34,7 @@ router.route('/', _auth.auth.checkUser).get(function (req, res) {
   var plants = req.body.plot.plants;
   var user = req.body.user;
 
-  plot.update(id, [plot, length, width, plants, user], function (data) {
+  _plots.update(id, [plot, length, width, plants, user], function (data) {
     res.send(data);
   });
 }).delete(function (req, res) {
@@ -46,7 +46,7 @@ router.route('/', _auth.auth.checkUser).get(function (req, res) {
   });
 });
 
-router.route('/plant', _auth.auth.checkUser).get(function (req, res) {
+router.route('/plant', _auth.checkUser).get(function (req, res) {
   var plant = req.body.plant;
   //calls database function to return info on plant;
   console.log('in route /plots/plants GET');
@@ -62,7 +62,7 @@ router.route('/plant', _auth.auth.checkUser).get(function (req, res) {
   console.log('in route /plots/plants DELETE');
 
   var id = req.body.plot._id;
-  _plots.plot.remove(id, function (data) {
+  _plots.remove(id, function (data) {
     res.send(data);
   });
 });

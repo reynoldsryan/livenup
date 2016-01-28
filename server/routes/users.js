@@ -1,19 +1,21 @@
-import { express } from 'express';
-import { auth } from './../auth';
+'use strict';
+
+const express = require('express');
+const auth  = require('./../auth');
 
 const router = express.Router();
 
 router.route('/', auth.checkUser)
   .post((req, res) => {
-    const userData = req.body.user.params;
+    let userData = req.body.user;
     //calls database and saves user profile
   })
   .put((req, res) => {
-    const userData = req.body.user.params;
+    let userData = req.body.user.params;
     //calls database and modifies a user profile;
   })
   .delete((req, res) => {
-    const userName = req.body.user.username;
+    let userName = req.body.user.username;
     //calls a database function that deletes the specified user
   });
 

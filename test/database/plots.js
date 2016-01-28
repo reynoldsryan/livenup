@@ -2,7 +2,7 @@
 
 var _mongoose = require('mongoose');
 
-var plotSchema = new _mongoose.mongoose.Schema({
+var plotSchema = new _mongoose.Schema({
   name: { type: String },
   length: { type: Number },
   width: { type: Number },
@@ -10,7 +10,7 @@ var plotSchema = new _mongoose.mongoose.Schema({
   user: { type: Array }
 });
 
-var Plot = _mongoose.mongoose.model('Plot', plotSchema);
+var Plot = _mongoose.model('Plot', plotSchema);
 
 module.exports = {
   find: function find(user, callback) {

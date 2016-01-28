@@ -2,20 +2,20 @@
 
 var _express = require('express');
 
-var _routes = require('./routes/routes.js');
+var _routes = require('./routes/routes');
 
 var _bodyParser = require('body-parser');
 
 var _mongoose = require('mongoose');
 
-_mongoose.mongoose.connect('mongodb://chuck:1qaz2wsx3edc4rfv@ds051595.mongolab.com:51595/heroku_d6g9mbk4');
-console.log(_mongoose.mongoose.connection.readyState);
+_mongoose.connect('mongodb://chuck:1qaz2wsx3edc4rfv@ds051595.mongolab.com:51595/heroku_d6g9mbk4');
+console.log(_mongoose.connection.readyState);
 
-var app = (0, _express.express)();
+var app = _express();
 var PORT = 3000;
 
-app.use(_bodyParser.bodyParser.json());
-app.use(_bodyParser.bodyParser.urlencoded({ extend: true }));
+app.use(_bodyParser.json());
+app.use(_bodyParser.urlencoded({ extend: true }));
 
 app.use(function (req, res, next) {
   res.header('Access-Controll-Allow-Origin', '*');
@@ -25,7 +25,7 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.use('/', _routes.routes);
+app.use('/', _routes);
 
 app.listen(PORT, function () {
   return console.log('listening on port ', PORT);
