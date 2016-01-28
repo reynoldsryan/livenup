@@ -1,13 +1,14 @@
 import { jwt } from 'jwt-simple';
 import { secret } from './utilities';
 import { bcrypt } from 'bcrypt';
+import { user } from './../database/users';
 
 module.exports = {  //add expires to payload, then check against
   login(req, res){
     const promise = new Promise ( (resolve, reject) => {
-      const user = req.body.user.username;
       const email = req.body.user.email;
-      const password = bcrypt(req.body.user.password);
+      const user = req.body.user.name;
+      const password = bcrypt(req.body.user.password, secret.salt);
 
       //should then call a database function which returns the hashed password
       //then call bcrypt.compare to see if the user exists
