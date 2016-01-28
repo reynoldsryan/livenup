@@ -2,4 +2,4 @@
 
 var _express = require('express');
 
-var router = _express.Router();
+var router = _express.express.Router();

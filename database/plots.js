@@ -1,4 +1,6 @@
-import { mongoose } from 'mongoose';
+'use strict';
+
+const mongoose = require('mongoose');
 
 const plotSchema = new mongoose.Schema( {
   name: {type: String},
@@ -17,8 +19,9 @@ module.exports = {
       callback(result);
     });
   },
+
   add (name, length, width, plants, user, callback) {
-    const plot = new Plot({
+    let plot = new Plot({
       name: name,
       length: length,
       width: width,
@@ -34,7 +37,8 @@ module.exports = {
       });
     });
   },
-  update (id, ...properties, callback) => {
+
+  update (id, properties, callback) {
     Plot.findById(id, (err, result) => {
       if(err) throw err;
       if(!result) {
@@ -54,8 +58,9 @@ module.exports = {
         });
       });
     });
-  }
-  remove (id, callback) => {
+  },
+
+  remove (id, callback) {
     Plot.findOneAndRemove({_id: id}, (err, result) => {
       if(err) throw err;
       callback({
