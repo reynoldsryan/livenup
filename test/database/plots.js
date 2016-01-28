@@ -1,14 +1,16 @@
-"use strict";
-var mongoose = require('mongoose');
+'use strict';
 
-var plotSchema = new mongoose.Schema({
+var _mongoose = require('mongoose');
+
+var plotSchema = new _mongoose.Schema({
   name: { type: String },
   length: { type: Number },
   width: { type: Number },
-  user: { type: String }
+  plants: { type: Array },
+  user: { type: Array }
 });
 
-var Plot = mongoose.model('Plot', plotSchema);
+var Plot = _mongoose.model('Plot', plotSchema);
 
 module.exports = {
   find: function find(user, callback) {
@@ -17,13 +19,15 @@ module.exports = {
       callback(result);
     });
   },
-  add: function add(user, name, length, width, callback) {
+  add: function add(name, length, width, plants, user, callback) {
     var plot = new Plot({
-      user: user,
       name: name,
       length: length,
       width: width,
+      plants: plants,
+      user: user
     });
+
     plot.save(function (err, result) {
       if (err) throw err;
       callback({
@@ -41,7 +45,8 @@ module.exports = {
       result.name = properties[0] || result.name;
       result.length = properties[1] || result.length;
       result.width = properties[2] || result.width;
-      result.user = properties[3] || result.user;
+      result.plants = properties[3] || result.plants;
+      result.user = properties[4] || result.user;
 
       result.save(function (err) {
         if (err) throw err;
