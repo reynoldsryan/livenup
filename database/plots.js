@@ -1,24 +1,36 @@
+import { mongoose } from 'mongoose';
+
 const plotSchema = new mongoose.Schema( {
   name: {type: String},
   length: {type: Number},
   width: {type: Number},
-  user: {type: String}
+  plants: {type: Array},
+  user: {type: Array}
 });
 
 const Plot = mongoose.model('Plot', plotSchema);
 
-model.exports = {
+module.exports = {
   find (user, callback) {
     Plot.find({user: user}, (err, result) => {
       if(err) throw err;
       callback(result);
     });
   },
-  add (user, name, length, width, callback) {
-    Plot.save({user: user, name: name, length: length, width: width}, (err) => {
+  add (name, length, width, plants, user, callback) {
+    const plot = new Plot({
+      name: name,
+      length: length,
+      width: width,
+      plants: plants,
+      user: user
+    });
+
+    plot.save((err, result) => {
       if(err) throw err;
       callback({
-        message: "Successfully added plot"
+        message: "Successfully added plot",
+        data: result
       });
     });
   },
@@ -31,7 +43,8 @@ model.exports = {
       result.name = properties[0] || result.name;
       result.length = properties[1] || result.length;
       result.width = properties[2] || result.width;
-      result.user = properties[3] || result.user;
+      result.plants = properties[3] || result.plants;
+      result.user = properties[4] || result.user;
 
       result.save((err) => {
         if(err) throw err;
