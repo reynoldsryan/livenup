@@ -4,35 +4,16 @@ var _express = require('express');
 
 var _auth = require('./../auth');
 
-var _plots = require('./plots.js');
+var _plots = require('./plots');
 
-var _plants = require('./plants.js');
+var _plants = require('./plants');
 
-var _users = require('./users.js');
+var _users = require('./users');
 
-var router = _express.Router();
-
-router.get('/', function(req, res){
-  res.send('Welcome to your localhost. Page not yet available, but will soon be LivenUp (or Greenify).')
-})
-router.get('',function(req,res){
-  console.log(__dirname.slice(0,-11))
-  res.sendFile(__dirname.slice(0,-11)+'index.html');
-});
-router.get('/bundle.js',function(req,res){
-  console.log(__dirname.slice(0,-11))
-  res.sendFile(__dirname.slice(0,-11)+'bundle.js');
-});
-router.get('/node_modules/bootstrap/dist/css/bootstrap.css',function(req,res){
-  console.log(__dirname.slice(0,-11))
-  res.sendFile(__dirname.slice(0,-11)+'/node_modules/bootstrap/dist/css/bootstrap.css');
-});
+var router = _express.express.Router();
 
 router.post('/login', function (req, res) {
-  console.log('req.body',req.body);
-  console.log('req.headers',req.headers);
-
-  _auth.login(req, res).then(function (token) {
+  _auth.auth.login(req, res).then(function (token) {
     res.set('token', token);
     res.sendStatus(200);
   }).catch(function () {
@@ -41,11 +22,12 @@ router.post('/login', function (req, res) {
 });
 
 router.post('/signup', function (req, res) {
-  _auth.signUp(req, res);
+  _auth.auth.signUp(req, res);
 });
 
-router.use('/plot', _plots);
-router.use('/plant', _plants);
-router.use('/user', _users);
+router.use('/plot', _plots.plots);
+router.use('/api', api);
+router.use('/plant', _plants.plants);
+router.use('/user', _users.users);
 
 module.exports = router;

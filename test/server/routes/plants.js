@@ -4,10 +4,9 @@ var _express = require('express');
 
 var _auth = require('./../auth');
 
-var router = _express.Router();
+var router = _express.express.Router();
 
-router.route('/', _auth.checkUser).get(function (req, res) {
-  res.send('hey you are in the plants route'); 
+router.route('/', _auth.auth.checkUser).get(function (req, res) {
   var params = req.body.search.params;
   //calls database and return list plants based on filter
 }).post(function (req, res) {
