@@ -1,4 +1,6 @@
-import { mongoose } from 'mongoose';
+'use strict';
+
+const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
   email: {type: String},
@@ -16,7 +18,8 @@ module.exports = {
       callback(result);
     });
   },
-  add (email, password, name, location) {
+  add (email, password, name, location, callback) {
+    console.log('Inside addUser in Users');
     const user = new User({
       email: email,
       password: password,
@@ -30,10 +33,10 @@ module.exports = {
         message: "Successfully added user",
         data: result
       });
-    })
+    });
   },
-  update (id, ...properties, callback) => {
-    Plot.findById(id, (err, result) => {
+  update (id, properties, callback) {
+    User.findById(id, (err, result) => {
       if(err) throw err;
       if(!result) {
         callback({message: "User with " + id + " not found"});
@@ -52,8 +55,8 @@ module.exports = {
       });
     });
   },
-  remove (id, callback) => {
-    Plot.findOneAndRemove({_id: id}, (err, result) => {
+  remove (id, callback) {
+    User.findOneAndRemove({_id: id}, (err, result) => {
       if(err) throw err;
       callback({
         message: "Successfully deleted user",
@@ -61,4 +64,4 @@ module.exports = {
       });
     });
   }
-}
+};

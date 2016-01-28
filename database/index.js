@@ -1,2 +1,2 @@
-import { mongoose } from 'mongoose';
-import { plots } from './plots';
+const mongoose = require('mongoose');
+const plots = require('./plots');
