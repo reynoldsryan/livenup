@@ -32,7 +32,7 @@ module.exports = {
       });
     })
   },
-  update (id, ...properties, callback) => {
+  update (id, properties, callback) {
     Plot.findById(id, (err, result) => {
       if(err) throw err;
       if(!result) {
@@ -52,7 +52,7 @@ module.exports = {
       });
     });
   },
-  remove (id, callback) => {
+  remove (id, callback) {
     Plot.findOneAndRemove({_id: id}, (err, result) => {
       if(err) throw err;
       callback({
