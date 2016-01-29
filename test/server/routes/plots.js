@@ -10,7 +10,7 @@ var router = _express.Router();
 
 router.route('/', _auth.checkUser).get(function (req, res) {
   console.log('ln 9: in route/plots GET');
-  var user = req.body.user;
+  var user = req.query.user;
 
   _plots.find(user, function (data) {
     res.send(data);
