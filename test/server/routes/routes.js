@@ -12,6 +12,26 @@ var _users = require('./users');
 
 var router = _express.Router();
 
+<<<<<<< Updated upstream
+=======
+router.get('/',function(req,res){
+  console.log(__dirname.slice(0,-11))
+  res.sendFile(__dirname.slice(0,-18)+'index.html');
+});
+
+router.get('/', function(req, res){
+  res.send('Welcome to your localhost. Page not yet available, but will soon be LivenUp (or Greenify).')
+})
+router.get('/bundle.js',function(req,res){
+  console.log(__dirname.slice(0,-11))
+  res.sendFile(__dirname.slice(0,-18)+'bundle.js');
+});
+router.get('/node_modules/bootstrap/dist/css/bootstrap.css',function(req,res){
+  console.log(__dirname.slice(0,-11))
+  res.sendFile(__dirname.slice(0,-18)+'/node_modules/bootstrap/dist/css/bootstrap.css');
+});
+
+>>>>>>> Stashed changes
 router.post('/login', function (req, res) {
   _auth.login(req, res)
   .then(function (token) {
