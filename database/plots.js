@@ -15,7 +15,7 @@ const Plot = mongoose.model('Plot', plotSchema);
 module.exports = {
   find (user, callback) {
     Plot.find({user: user}, (err, result) => {
-      if(err) throw err;
+      if(err) console.error(err);
       callback(result);
     });
   },
@@ -40,7 +40,7 @@ module.exports = {
 
   update (id, properties, callback) {
     Plot.findById(id, (err, result) => {
-      if(err) throw err;
+      if(err) console.error(err);
       if(!result) {
         callback({message: "Plot with " + id + " not found"});
       }
@@ -51,7 +51,7 @@ module.exports = {
       result.user = properties[4] || result.user;
 
       result.save((err) => {
-        if(err) throw err;
+        if(err) console.error(err);
         callback({
           message: "Successfully updated the plot",
           data: result
@@ -62,7 +62,7 @@ module.exports = {
 
   remove (id, callback) {
     Plot.findOneAndRemove({_id: id}, (err, result) => {
-      if(err) throw err;
+      if(err) console.error(err);
       callback({
         message: "Successfully deleted plot",
         data: result

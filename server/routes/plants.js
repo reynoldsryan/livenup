@@ -7,8 +7,11 @@ const router = express.Router();
 
 router.route('/', auth.checkUser)
   .get((req, res) => {
-    let plant = req.query.plant.name;
+    let _plant = req.query.plant;
 
+    plant.find(_plant, function(data){
+      res.send(data);
+    })
   })
   .post((req, res) => {
     //calls database and saves a plant
