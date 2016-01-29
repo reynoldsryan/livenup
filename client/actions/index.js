@@ -1,4 +1,4 @@
-import instance from 'axios';
+import axios from 'axios';
 export const FETCH_USER_PLOTS = 'FETCH_USER_PLOTS';
 export const PLANT_SEARCH = 'PLANT_SEARCH';
 
@@ -29,7 +29,7 @@ export function fetchUserPlots() {
   //     resolve({data: dummyData});
   //   }, 500);
   // });
-  const request = axios.get('/plot', {params: {user: 'oliver'}})
+  const request = axios.get('/plot', {params: {user: 'erik@gmail.com'}})
                   .catch((response) => {
                     if(response  instanceof Error) {
                       console.error('GET | Error sending reponse',response);
@@ -49,7 +49,7 @@ export function fetchUserPlots() {
 }
 
 export function plantSearch(plant) {
-  console.log('Searching for plants matching:',plant);
+  // console.log('Searching for plants matching:',plant);
   const requestResults = new Promise(function(resolve, reject) {
     setTimeout(function () {
       resolve(['sunflower', 'daisy', 'carrot', 'potato']);
@@ -63,12 +63,12 @@ export function plantSearch(plant) {
 }
 
 export function addPlot(newPlot) {
-  console.log('calling addPlot in actions/index.js with arg', newPlot);
-  const request = axios.post('/plot', {
-    data: {
-      user: 'Oliver',
+  // console.log('calling addPlot in actions/index.js with arg', newPlot);
+  let ax = axios.create({timeout: 2000});
+  const request = ax.post('/plot', {
+      user: {"email": 'erik@gmail.com'},
       plot: newPlot
-    }
+
   }).catch((response) => {
     if(response  instanceof Error) {
       console.error('POST | Error sending reponse',response);
@@ -81,6 +81,7 @@ export function addPlot(newPlot) {
   //   type: ADD_PLOT,
   //   payload: { newPlot }
   // }
+  // console.log('REQUEST IN ADD PLOT ACTION CREATOR',request)
   return {
     type: ADD_PLOT,
     payload: request
@@ -88,7 +89,8 @@ export function addPlot(newPlot) {
 }
 
 export function removePlot(plotId) {
-  const request = axios.delete('/plot', {params: {id: plotId}})
+  let ax = axios.create({timeout: 2000});
+  const request = ax.delete('/plot', {params: {id: plotId}})
                   .catch((response) => {
                     if(response  instanceof Error) {
                       console.error('DELETE | Error sending reponse',response);
@@ -107,11 +109,11 @@ export function removePlot(plotId) {
 }
 
 export function updatePlot(updatedPlot) {
-  console.log('TRYING TO UPDATE PLOT',updatePlot);
-  const request = axios.put('/plot', {
-                    data: {
+  // console.log('TRYING TO UPDATE PLOT',updatePlot);
+  let ax = axios.create({timeout: 2000});
+  const request = ax.put('/plot', {
+                      user: 'erik@gmail.com',
                       plot: updatedPlot
-                    }
                   })
                   .catch((response) => {
                     if(response  instanceof Error) {

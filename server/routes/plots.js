@@ -19,7 +19,7 @@ router.route('/', auth.checkUser)
   .post((req, res) => {
     console.log('ln 17: in route/plots POST');
 
-    let _plot = req.body.plot.name;
+    let _name = req.body.plot.name;
     let _length = req.body.plot.length;
     let _width = req.body.plot.width;
     let _plants = req.body.plot.plants;
@@ -45,7 +45,7 @@ router.route('/', auth.checkUser)
   })
   .delete((req, res) => {
     console.log('ln 39: in route/plots DELETE');
-    let id = req.body.plot._id;
+    let id = req.query.id;
 
     plot.remove(id, function(data) {
       res.send(data);
