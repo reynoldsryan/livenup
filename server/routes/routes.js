@@ -33,6 +33,7 @@ router.post('/signup', (req, res) => {
       //handle error
       res.sendStatus(500);
     });
+  })
 
 router.use('/plot', plots);
 router.use('/plant', plants);
