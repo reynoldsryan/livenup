@@ -34,7 +34,7 @@ class SignupForm extends Component {
     this.props.signupUser(this.state.username, this.state.email, this.state.password);
     this.setState({ username: '', email: '', password: '' });
   }
-
+  
   render() {
 
     return (
