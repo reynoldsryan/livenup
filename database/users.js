@@ -29,10 +29,7 @@ module.exports = {
 
     user.save((err, result) => {
       if (err) throw err;
-      callback({
-        message: "Successfully added user",
-        data: result
-      });
+      callback(result);
     });
   },
   update (id, properties, callback) {

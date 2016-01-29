@@ -2,13 +2,13 @@
 
 const express = require('express');
 const auth = require('./../auth');
-
+const plant = require('../../database/plants')
 const router = express.Router();
 
 router.route('/', auth.checkUser)
   .get((req, res) => {
-    let params = req.body.search.params;
-    //calls database and return list plants based on filter
+    let plant = req.body.plant.name;
+
   })
   .post((req, res) => {
     //calls database and saves a plant
