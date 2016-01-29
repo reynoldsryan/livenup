@@ -16,6 +16,12 @@ app.use((req, res, next) => {
   next();
 });
 
+<<<<<<< Updated upstream
+=======
+console.log('__dirname: ', __dirname);
+
+app.use(express.static(__dirname + '/../client/'));
+>>>>>>> Stashed changes
 app.use('/', routes);
 
 app.listen(PORT, () => console.log('listening on port ', PORT));

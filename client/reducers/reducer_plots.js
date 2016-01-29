@@ -7,8 +7,20 @@ export default function(state = null, action) {
   console.log('Redcer state:',state,'action',action);
   switch (action.type) {
     case FETCH_USER_PLOTS:
+<<<<<<< Updated upstream
       console.log('Fetch user plots, payload:', action.paylaod);
       return action.payload.data;
+=======
+    if(action.payload === undefined) {
+      console.error('Fetch user plots payload undefined, return state');
+      return state;
+    }
+      console.log('Fetch user plots, payload:', action.payload);
+      return {
+        plots: action.payload.data,
+        plants: []
+      };
+>>>>>>> Stashed changes
       break;
     case ADD_PLOT:
       console.log('Add plot, payload:', action.payload);
