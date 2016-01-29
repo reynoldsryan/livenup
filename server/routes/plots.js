@@ -45,8 +45,7 @@ router.route('/', auth.checkUser)
   })
   .delete((req, res) => {
     console.log('ln 39: in route/plots DELETE');
-
-    let _id = req.query.plot._id;
+    let id = req.body.plot._id;
 
     plot.remove(id, function(data) {
       res.send(data);
