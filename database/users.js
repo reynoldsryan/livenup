@@ -14,7 +14,7 @@ const User = mongoose.model('User', userSchema);
 module.exports = {
   find (email, callback) {
     User.find({email: email}, (err, result) => {
-      if (err) throw err;
+      if(err) console.error(err);
       callback(result);
     });
   },
@@ -28,13 +28,13 @@ module.exports = {
     });
 
     user.save((err, result) => {
-      if (err) throw err;
+      if(err) console.error(err);
       callback(result);
     });
   },
   update (id, properties, callback) {
     User.findById(id, (err, result) => {
-      if(err) throw err;
+      if(err) console.error(err);
       if(!result) {
         callback({message: "User with " + id + " not found"});
       }
@@ -54,7 +54,7 @@ module.exports = {
   },
   remove (id, callback) {
     User.findOneAndRemove({_id: id}, (err, result) => {
-      if(err) throw err;
+      if(err) console.error(err);
       callback({
         message: "Successfully deleted user",
         data: result
