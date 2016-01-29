@@ -56,13 +56,10 @@ module.exports = {  //add expires to payload, then check against
       let _location = req.body.user.location;
 
       let payload = {email: _email, scope: secret.scope};
-      let token = jwt.encode(payload, secret.salt);
-
-      console.log('inside addUser auth, User: ', user);
+      let token = jwt.encode(payload, salt);
 
       user.add(_email, _password, _user, _location, (data) => {
         let resolved = {token: token, data: data};
-        console.log('resolved from user.add in auth: ', resolved);
         resolve(resolved);
         //------/ ADD ERROR HANDLING /-----//
       });

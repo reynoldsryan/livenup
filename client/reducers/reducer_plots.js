@@ -11,7 +11,8 @@ export default function(state = null, action) {
       console.error('Fetch user plots payload undefined, return state');
       return state;
     }
-      // console.log('Fetch user plots, payload:', action.payload);
+
+      console.log('Fetch user plots, payload:', action.payload);
       return {
         plots: action.payload.data,
         plants: []
