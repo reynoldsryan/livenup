@@ -1,5 +1,4 @@
-import axios from 'axios';
-
+import instance from 'axios';
 export const FETCH_USER_PLOTS = 'FETCH_USER_PLOTS';
 export const PLANT_SEARCH = 'PLANT_SEARCH';
 
