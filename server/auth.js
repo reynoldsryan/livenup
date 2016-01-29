@@ -21,9 +21,7 @@ module.exports = {  //add expires to payload, then check against
           resolve({token: token, data: data});
         }
         else {
-          reject();
-          //------/ ADD ERROR HANDLING /-----//
-
+          reject('Login Error: incorrect username or password');
         }
       });
     });
@@ -31,13 +29,8 @@ module.exports = {  //add expires to payload, then check against
   },
 
   checkUser (req, res, next) {
-    // console.log('****** Checking User Auth: ', req.headers.token);
-    // console.log('****** Secret in user.find in auth: ', secret);
-
     let _token = req.headers.token;
     let _decoded = jwt.decode(_token, secret.salt);
-
-    // console.log('****** Decoded in user.find in auth: ', _decoded);
 
     if(_decoded.scope === secret.scope){
       next();
@@ -47,8 +40,7 @@ module.exports = {  //add expires to payload, then check against
 
   addUser (req, res) {
     let newUser = new Promise ((resolve, reject) => {
-
-      //console.log('inside addUser auth, req.body: ', req.body);
+      console.log('----| in signup Auth: ', req.body.user);
 
       let _email = req.body.user.email;
       let _password = bcrypt.hashSync(req.body.user.password, salt);
@@ -58,13 +50,14 @@ module.exports = {  //add expires to payload, then check against
       let payload = {email: _email, scope: secret.scope};
       let token = jwt.encode(payload, secret.salt);
 
-      console.log('inside addUser auth, User: ', user);
-
       user.add(_email, _password, _user, _location, (data) => {
-        let resolved = {token: token, data: data};
-        console.log('resolved from user.add in auth: ', resolved);
-        resolve(resolved);
-        //------/ ADD ERROR HANDLING /-----//
+        if(data) {
+          let resolved = {token: token, data: data};
+          resolve(resolved);
+        }
+        else {
+          reject('Signup Error: this user already exists');
+        }
       });
     });
     return newUser;
