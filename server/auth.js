@@ -40,6 +40,8 @@ module.exports = {  //add expires to payload, then check against
 
   addUser (req, res) {
     let newUser = new Promise ((resolve, reject) => {
+      console.log('----| in signup Auth: ', req.body.user);
+
       let _email = req.body.user.email;
       let _password = bcrypt.hashSync(req.body.user.password, salt);
       let _user = req.body.user.name;
@@ -48,23 +50,15 @@ module.exports = {  //add expires to payload, then check against
       let payload = {email: _email, scope: secret.scope};
       let token = jwt.encode(payload, secret.salt);
 
-      console.log('inside addUser auth, User: ', user);
-      User.find({email: _email}, (data) => {
-        if(!data){
-          user.add(_email, _password, _user, _location, (data) => {
-            if(data) {
-              let resolved = {token: token, data: data};
-              resolve(resolved);
-            }
-            else {
-              reject('Signup Error: invalid or missing information');
-            }
-          });
-
+      user.add(_email, _password, _user, _location, (data) => {
+        if(data) {
+          let resolved = {token: token, data: data};
+          resolve(resolved);
+        }
         else {
           reject('Signup Error: this user already exists');
         }
-      })
+      });
     });
     return newUser;
   }
