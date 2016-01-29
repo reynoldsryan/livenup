@@ -26,14 +26,13 @@ router.post('/login', (req, res) => {
 router.post('/signup', (req, res) => {
   auth.addUser(req, res)
     .then( (promise) => {
-      console.log('promise from /signup in routes: ', promise)
       res.set('token', promise.token);
       res.json(promise.data);
     })
     .catch( () => {
       //handle error
+      res.sendStatus(500);
     });
-});
 
 router.use('/plot', plots);
 router.use('/plant', plants);
