@@ -19,7 +19,19 @@ router.post('/login', (req, res) => {
   });
 
 router.post('/signup', (req, res) => {
+<<<<<<< Updated upstream
   auth.signUp(req, res);
+=======
+  auth.addUser(req, res)
+    .then( (promise) => {
+      res.set('token', promise.token);
+      res.json(promise.data);
+    })
+    .catch( () => {
+      //handle error
+      res.sendStatus(500);
+    });
+>>>>>>> Stashed changes
 });
 
 router.use('/plot', plots);

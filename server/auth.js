@@ -39,6 +39,24 @@ module.exports = {  //add expires to payload, then check against
     //call database function to submit user info
     //redirect to login
 
+<<<<<<< Updated upstream
+=======
+      let _email = req.body.user.email;
+      let _password = bcrypt.hashSync(req.body.user.password, salt);
+      let _user = req.body.user.name;
+      let _location = req.body.user.location;
+
+      let payload = {email: _email, scope: secret.scope};
+      let token = jwt.encode(payload, salt);
+
+      user.add(_email, _password, _user, _location, (data) => {
+        let resolved = {token: token, data: data};
+        resolve(resolved);
+        //------/ ADD ERROR HANDLING /-----//
+      });
+    });
+    return newUser;
+>>>>>>> Stashed changes
   }
 
 };
