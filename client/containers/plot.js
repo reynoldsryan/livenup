@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Table, Panel } from 'react-bootstrap';
+import { Table, Panel, Button, ButtonGroup } from 'react-bootstrap';
 
 import { addPlant, removePlant } from '../actions/index';
-import { removePlot, renamePlot } from '../actions/index';
+import { removePlot, updatePlot } from '../actions/index';
 
 import { bindActionCreators } from 'redux';
+
+import EditPlotModal from '../components/editPlotModal';
 
 class Plot extends Component {
   constructor(props) {
@@ -14,15 +16,18 @@ class Plot extends Component {
     console.log('Plot Props', props);
     this.state = {
       listView: true,
-      open: true
+      open: true,
+      showEditPlotModal: false
     };
 
     this.listView = this.listView.bind(this);
     this.gridView = this.gridView.bind(this);
     this.renderView = this.renderView.bind(this);
     this.toggleView = this.toggleView.bind(this);
-    this.handleRename = this.handleRename.bind(this);
+    this.handleUpdate = this.handleUpdate.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
+    this.showModal = this.showModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
   toggleView() {
@@ -74,25 +79,43 @@ class Plot extends Component {
     return gridView();
   }
 
-  handleRename() {
-    this.props.renamePlot(this.props.plot.name, "new "+this.props.plot.name+" Name");
+  handleUpdate(updatedPlot) {
+    this.props.updatePlot(updatedPlot);
+    this.closeModal();
   }
 
   handleRemove() {
-    this.props.removePlot(this.props.plot.name);
+    this.props.removePlot(this.props.plot._id);
+    this.closeModal();
+  }
+
+  showModal() {
+    this.setState({showEditPlotModal: true});
+  }
+
+  closeModal() {
+    this.setState({showEditPlotModal: false});
   }
 
 
   render() {
     const header = (
-      <span>
-        <h3>{this.props.plot.name}</h3>
-        <button onClick={this.toggleView}>Toggle View</button>
-        <button onClick={this.handleRename}>Rename Plot</button>
-        <button onClick={this.handleRemove}>Remove Plot</button>
-      </span>);
+        <h3><span>{this.props.plot.name} | Size(ft): {this.props.plot.length} X {this.props.plot.width}</span>
+          <ButtonGroup style={{float: 'right'}}>
+            <Button bsStyle="primary" onClick={this.toggleView}>Toggle View</Button>
+            <Button bsStyle="info" onClick={this.showModal}>Edit Plot</Button>
+          </ButtonGroup>
+        </h3>
+      );
+
     return (
       <Panel collapsible expanded={this.state.open} header={header}>
+        <EditPlotModal
+          plot={this.props.plot}
+          show={this.state.showEditPlotModal}
+          closeModal={this.closeModal}
+          update={this.handleUpdate}
+          remove={this.handleRemove} />
         {this.state.listView ? this.listView() : this.gridView()}
       </Panel>
     );
@@ -101,7 +124,7 @@ class Plot extends Component {
 
 function mapDispatchToProps(dispatch) {
   // console.log('state in planner.js from fn()mapDispatchTopProps', dispatch);
-  return bindActionCreators({ addPlant, removePlant, removePlot, renamePlot }, dispatch);
+  return bindActionCreators({ addPlant, removePlant, removePlot, updatePlot }, dispatch);
 }
 
 function mapStateToProps({ userPlots }) {
