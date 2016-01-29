@@ -12,8 +12,10 @@ module.exports = {  //add expires to payload, then check against
       let  _email = req.body.user.email;
 
       user.find(_email, (data) => {
+        console.log('data in user.find in auth: ', data);
+
         let payload = {email: _email, scope: secret.scope};
-        let token = jwt.encode(payload, salt);
+        let token = jwt.encode(payload, secret.salt);
 
         if(bcrypt.compareSync(req.body.user.password, data[0].password)) {
           resolve({token: token, data: data});
@@ -29,10 +31,15 @@ module.exports = {  //add expires to payload, then check against
   },
 
   checkUser (req, res, next) {
-    let _token = req.header.token;
-    let _decoded = jwt.decode(token, salt);
+    // console.log('****** Checking User Auth: ', req.headers.token);
+    // console.log('****** Secret in user.find in auth: ', secret);
 
-    if(decoded.payload.scope === secret.scope){
+    let _token = req.headers.token;
+    let _decoded = jwt.decode(_token, secret.salt);
+
+    // console.log('****** Decoded in user.find in auth: ', _decoded);
+
+    if(_decoded.scope === secret.scope){
       next();
     }
     else{ console.error('invalid token') };
@@ -49,7 +56,7 @@ module.exports = {  //add expires to payload, then check against
       let _location = req.body.user.location;
 
       let payload = {email: _email, scope: secret.scope};
-      let token = jwt.encode(payload, salt);
+      let token = jwt.encode(payload, secret.salt);
 
       console.log('inside addUser auth, User: ', user);
 
