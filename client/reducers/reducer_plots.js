@@ -4,17 +4,25 @@ import { ADD_PLOT, REMOVE_PLOT, UPDATE_PLOT } from '../actions/index';
 import { ADD_PLANT, REMOVE_PLANT } from '../actions/index';
 
 export default function(state = null, action) {
-  console.log('Redcer state:',state,'action',action);
+  // console.log('Redcer state:',state,'action',action);
   switch (action.type) {
     case FETCH_USER_PLOTS:
-      console.log('Fetch user plots, payload:', action.payload);
+    if(action.payload === undefined) {
+      console.error('Fetch user plots payload undefined, return state');
+      return state;
+    }
+      // console.log('Fetch user plots, payload:', action.payload);
       return {
         plots: action.payload.data,
         plants: []
       };
       break;
     case ADD_PLOT:
-      console.log('Add plot, payload:', action.payload);
+      if(action.payload === undefined) {
+        console.error('add plot payload undefined, return state');
+        return state;
+      }
+      // console.log('Add plot, payload:', action.payload);
       if(action.payload.data) {
         return {
           plants: [...state.plants],
@@ -28,7 +36,11 @@ export default function(state = null, action) {
       }
       break;
     case REMOVE_PLOT:
-      console.log('Remove plot, payload:', action.payload);
+    if(action.payload === undefined) {
+      console.error('Remove plot payload undefined, return state');
+      return state;
+    }
+      // console.log('Remove plot, payload:', action.payload);
       let plotIndex = null;
       if(action.payload.data.data.message === "Successfully deleted plot") {
         state.plots.forEach((plot, i) => {
@@ -54,20 +66,24 @@ export default function(state = null, action) {
       break;
 
     case UPDATE_PLOT:
-      console.log('Updating plot plot, payload: ',action.payload);
+    if(action.payload === undefined) {
+      console.error('Update plot payload undefined, return state');
+      return state;
+    }
+      // console.log('Updating plot plot, payload: ',action.payload);
       let updatedPlots = state.plots.slice();;
 
       if(action.payload.data.message === "Successfully updated the plot") {
 
         state.plots.forEach((plot, i) => {
-          console.error('plot',plot);
+          // console.error('plot',plot);
           if(plot._id === action.payload.data.data._id) {
-            console.log('plot._id === action.payload.data.data._id',plot._id === action.payload.data.data._id);
+            // console.log('plot._id === action.payload.data.data._id',plot._id === action.payload.data.data._id);
             updatedPlots[i] = action.payload.data.data;
           }
         });
       }
-      console.log('Updated Plots', updatedPlots);
+      // console.log('Updated Plots', updatedPlots);
       return {
         plants: state.plants.slice(),
         plots: updatedPlots

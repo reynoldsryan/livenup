@@ -22,6 +22,9 @@ app.use((req, res, next) => {
   next();
 });
 
+console.log('__dirname: ', __dirname);
+
+app.use(express.static(__dirname + '/../'));
 app.use('/', routes);
 
 app.listen(PORT, () => console.log('listening on port ', PORT));

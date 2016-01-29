@@ -49,14 +49,16 @@ export default class EditPlotModal extends Component {
 
   handleLengthChange(e) {
     var num = Number.parseInt(e.target.value);
-    if(num > 0 && num < 100) {
+    console.log('length change:',e.target.value);
+    if(e.target.value === '' || (num > 0 && num < 100)) {
       this.setState({newLength : e.target.value});
     }
   }
 
   handleWidthChange(e) {
     var num = Number.parseInt(e.target.value);
-    if(num > 0 && num < 100) {
+    console.log('width change:',e.target.value);
+    if(e.target.value === '' || (num > 0 && num < 100)) {
       this.setState({newWidth : e.target.value});
     }
   }
@@ -75,12 +77,12 @@ export default class EditPlotModal extends Component {
             value={this.state.newName}
             onChange={e => this.setState({newName: e.target.value})} />
           <Input
-            type="text"
+            type="number"
             label="Edit Length:"
             value={this.state.newLength}
             onChange={this.handleLengthChange} />
           <Input
-            type="text"
+            type="number"
             label="Edit Width:"
             value={this.state.newWidth}
             onChange={this.handleWidthChange} />
