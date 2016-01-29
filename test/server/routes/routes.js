@@ -12,7 +12,6 @@ var _users = require('./users');
 
 var router = _express.Router();
 
-
 router.post('/login', function (req, res) {
   _auth.login(req, res)
   .then(function (token) {
