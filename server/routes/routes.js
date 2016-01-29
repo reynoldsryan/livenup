@@ -8,12 +8,15 @@ const users = require('./users');
 
 const router = express.Router();
 
+router.post('/', (req, res) => {
+
+})
 
 router.post('/login', (req, res) => {
   auth.login(req, res)
-    .then( (token) => {
-      res.set('token', token);
-      res.sendStatus(200);
+    .then((promise) => {
+      res.set('token', promise.token);
+      res.json(promise.data);
     })
     .catch( () => {
       //redirect to signup
@@ -21,7 +24,15 @@ router.post('/login', (req, res) => {
   });
 
 router.post('/signup', (req, res) => {
-  auth.addUser(req, res);
+  auth.addUser(req, res)
+    .then( (promise) => {
+      console.log('promise from /signup in routes: ', promise)
+      res.set('token', promise.token);
+      res.json(promise.data);
+    })
+    .catch( () => {
+      //handle error
+    });
 });
 
 router.use('/plot', plots);
