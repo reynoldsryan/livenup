@@ -53,31 +53,31 @@ router.route('/')
     });
   });
 
-router.route('/plant')
-  .get(auth.checkUser, (req, res) => {
-    let _plant = req.body.plant;
-    //calls database function to return info on plant;
-    console.log('in route /plots/plants GET');
-
-    plant.find(_plant, function(data))
-  })
-  .post(auth.checkUser, (req, res) => {
-    let plant = req.body.plant;
-    //calls a database function to save a plant
-    console.log('in route /plots/plants POST');
-  })
-  .put(auth.checkUser, (req, res) => {
-    let plant = req.body.plant;
-    //calls a database function to edit a plant
-    console.log('in route /plots/plants PUT');
-  })
-  .delete(auth.checkUser, (req, res) => {
-    console.log('in route /plots/plants DELETE');
-
-    let _id = req.body.plot._id;
-    plot.remove(id, function(data) {
-      res.send(data);
-    });
-  });
+// router.route('/plant')
+//   .get(auth.checkUser, (req, res) => {
+//     let _plant = req.query.plant;
+//     //calls database function to return info on plant;
+//     console.log('in route /plots/plants GET');
+//
+//     plant.find(_plant, function(data))
+//   })
+//   .post(auth.checkUser, (req, res) => {
+//     let plant = req.body.plant;
+//     //calls a database function to save a plant
+//     console.log('in route /plots/plants POST');
+//   })
+//   .put(auth.checkUser, (req, res) => {
+//     let plant = req.body.plant;
+//     //calls a database function to edit a plant
+//     console.log('in route /plots/plants PUT');
+//   })
+//   .delete(auth.checkUser, (req, res) => {
+//     console.log('in route /plots/plants DELETE');
+//
+//     let _id = req.body.plot._id;
+//     plot.remove(id, function(data) {
+//       res.send(data);
+//     });
+//   });
 
 module.exports = router;
