@@ -57,7 +57,6 @@ module.exports = {  //add expires to payload, then check against
         }
         else {
           reject('Signup Error: this user already exists');
-        }
       });
     });
     return newUser;

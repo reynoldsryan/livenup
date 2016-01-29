@@ -8,16 +8,16 @@ class SignupForm extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {username: '', email: '', password: ''};
+    this.state = {name: '', email: '', password: ''};
 
-    this.onUsernameChange = this.onUsernameChange.bind(this);
+    this.onNameChange = this.onNameChange.bind(this);
     this.onEmailChange = this.onEmailChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
-  onUsernameChange(event) {
-    this.setState({ username: event.target.value });
+  onNameChange(event) {
+    this.setState({ name: event.target.value });
   }
 
   onEmailChange(event) {
@@ -31,10 +31,10 @@ class SignupForm extends Component {
   onFormSubmit(event) {
     console.log(event);
     event.preventDefault();
-    this.props.signupUser(this.state.username, this.state.email, this.state.password);
-    this.setState({ username: '', email: '', password: '' });
+    this.props.signupUser(this.state.name, this.state.email, this.state.password);
+    this.setState({ name: '', email: '', password: '' });
   }
-  
+
   render() {
 
     return (
@@ -43,10 +43,10 @@ class SignupForm extends Component {
         <form onSubmit={this.onFormSubmit}>
           <Input
             type='text'
-            label='Username'
-            placeholder='Enter your username'
-            value={this.state.username}
-            onChange={this.onUsernameChange} />
+            label='Name'
+            placeholder='Enter your name'
+            value={this.state.name}
+            onChange={this.onNameChange} />
           <Input
             type='email'
             label='Email Address'

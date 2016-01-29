@@ -4,7 +4,7 @@ import { Route, IndexRoute } from 'react-router';
 import App from './components/app';
 import Index from './components/index';
 import MyPlants from './components/myplants';
-import Profile from './components/profile';
+import Profile from './containers/profile';
 import Login from './containers/login';
 import Signup from './containers/signup';
 
