@@ -18,8 +18,8 @@ router.post('/login', (req, res) => {
       res.set('token', promise.token);
       res.json(promise.data);
     })
-    .catch( () => {
-      //redirect to signup
+    .catch( (err) => {
+      console.error(err);
     });
   });
 
@@ -30,8 +30,8 @@ router.post('/signup', (req, res) => {
       res.set('token', promise.token);
       res.json(promise.data);
     })
-    .catch( () => {
-      //handle error
+    .catch( (err) => {
+      console.error(err);
     });
 });
 
