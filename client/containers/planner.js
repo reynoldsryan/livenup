@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Modal, Button } from 'react-bootstrap';
 
-import { fetchUserPlots, addPlot , plantSearch} from '../actions/index';
+import { fetchUserPlots, addPlot , plantSearch } from '../actions/index';
 
 import Plot from './plot';
 import AddPlotModal from '../components/addPlotModal';
@@ -11,7 +11,7 @@ import AddPlotModal from '../components/addPlotModal';
 class Planner extends Component {
   constructor(props) {
     super(props);
-    console.log('props in planner', props);
+    // console.log('props in planner', props);
     this.state = {
       counter: 1,
       showAddPlotModal: false,
@@ -37,7 +37,7 @@ class Planner extends Component {
 
   renderPlots(plot) {
     console.warn('Rendering plots');
-    console.log('plot in planner',plot)
+    // console.log('plot in planner',plot)
     plot.plants = plot.plants || [];
     return <Plot key={plot._id} plot={plot} />;
   }
