@@ -31,6 +31,9 @@ export function fetchUserPlots() {
   //     resolve({data: dummyData});
   //   }, 500);
   // });
+  let self = this;
+  console.log(window.localStorage);
+  // axios({headers: {'token' : token}})
   const request = axios.get('/plot', {params: {user: 'erik@gmail.com'}})
                   .catch((response) => {
                     if(response  instanceof Error) {

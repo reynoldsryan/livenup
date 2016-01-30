@@ -19,7 +19,6 @@ router.post('/login', (req, res) => {
       res.send(err);
     });
   });
-
 router.post('/signup', (req, res) => {
   auth.addUser(req, res)
     .then((promise) => {
@@ -33,7 +32,6 @@ router.post('/signup', (req, res) => {
       res.send(err);
     });
   })
-
 router.use('/plot', plots);
 router.use('/plant', plants);
 router.use('/user', users);
