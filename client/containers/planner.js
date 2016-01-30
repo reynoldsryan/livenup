@@ -30,7 +30,7 @@ class Planner extends Component {
       if(!this.props.plots ||!this.props.fetched) {
         this.props.fetchUserPlots();
       }
-      this.props.plantSearch('sun');
+      // this.props.plantSearch('sun');
 
     console.log('component will mount');
   }

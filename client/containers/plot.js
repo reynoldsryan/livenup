@@ -9,6 +9,7 @@ import { removePlot, updatePlot } from '../actions/index';
 import { bindActionCreators } from 'redux';
 
 import EditPlotModal from '../components/editPlotModal';
+import AddPlantModal from './addPlantModal';
 
 class Plot extends Component {
   constructor(props) {
@@ -17,7 +18,8 @@ class Plot extends Component {
     this.state = {
       listView: true,
       open: true,
-      showEditPlotModal: false
+      showEditPlotModal: false,
+      showAddPlantModal: false
     };
 
     this.listView = this.listView.bind(this);
@@ -26,7 +28,8 @@ class Plot extends Component {
     this.toggleView = this.toggleView.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
-    this.showModal = this.showModal.bind(this);
+    this.showEditPlotModal = this.showEditPlotModal.bind(this);
+    this.showAddPlantModal = this.showAddPlantModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
 
@@ -89,23 +92,31 @@ class Plot extends Component {
     this.closeModal();
   }
 
-  showModal() {
+  showEditPlotModal() {
     this.setState({showEditPlotModal: true});
+  }
+
+  showAddPlantModal() {
+    this.setState({showAddPlantModal: true});
   }
 
   closeModal() {
     this.setState({showEditPlotModal: false});
+    this.setState({showAddPlantModal: false});
   }
 
 
   render() {
     const header = (
+      <div>
         <h3><span>{this.props.plot.name} | Size(ft): {this.props.plot.length} X {this.props.plot.width}</span>
           <ButtonGroup style={{float: 'right'}}>
+            <Button bsStyle="info" onClick={this.showAddPlantModal}>Add Plant</Button>
             <Button bsStyle="primary" onClick={this.toggleView}>Toggle View</Button>
-            <Button bsStyle="info" onClick={this.showModal}>Edit Plot</Button>
+            <Button bsStyle="info" onClick={this.showEditPlotModal}>Edit Plot</Button>
           </ButtonGroup>
         </h3>
+      </div>
       );
 
     return (
@@ -116,6 +127,7 @@ class Plot extends Component {
           closeModal={this.closeModal}
           update={this.handleUpdate}
           remove={this.handleRemove} />
+        <AddPlantModal show={this.state.showAddPlantModal} closeModal={this.closeModal}/>
         {this.state.listView ? this.listView() : this.gridView()}
       </Panel>
     );
