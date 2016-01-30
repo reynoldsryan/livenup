@@ -53,7 +53,6 @@ router.route('/')
     });
   });
 
-
 // router.route('/plant')
 //   .get(auth.checkUser, (req, res) => {
 //     let _plant = req.query.plant;
