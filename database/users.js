@@ -19,18 +19,26 @@ module.exports = {
     });
   },
   add (email, password, name, location, callback) {
-    console.log('Inside addUser in Users');
-    const user = new User({
+    let user = new User({
       email: email,
       password: password,
       name: name,
       locaiton: location
     });
 
-    user.save((err, result) => {
-      if(err) console.error(err);
-      callback(result);
-    });
+    User.count({email: email}, (err, count) => {
+      console.log('----| count in User.find DBuser: ', count, ' err: ', err);
+
+      if(count === 0){
+        user.save((err, result) => {
+          if(err) console.error(err);
+          callback(result);
+        });
+      }
+      else {
+        callback(false);
+      }
+    })
   },
   update (id, properties, callback) {
     User.findById(id, (err, result) => {

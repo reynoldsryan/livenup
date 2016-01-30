@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { routeActions } from 'react-router-redux';
 import { connect } from 'react-redux';
-
+import LogInOut from './logInOut';
 
 class NavBar extends Component {
   render() {
@@ -24,14 +24,7 @@ class NavBar extends Component {
               <NavItem eventKey={2}>Profile</NavItem>
             </LinkContainer>
           </Nav>
-          <Nav pullRight>
-            <LinkContainer to={{ pathname: '/login' }}>
-              <NavItem eventKey={3}>Log In</NavItem>
-            </LinkContainer>
-            <LinkContainer to={{ pathname: '/signup' }}>
-              <NavItem eventKey={4}>Sign Up</NavItem>
-            </LinkContainer>
-          </Nav>
+          <LogInOut />
         </Navbar.Collapse>
       </Navbar>
     );
