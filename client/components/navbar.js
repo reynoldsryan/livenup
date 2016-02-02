@@ -17,7 +17,7 @@ class NavBar extends Component {
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav>
-            <LinkContainer to={{ pathname: '/myplants' }}>
+            <LinkContainer to={{ pathname: '/myspaces' }}>
               <NavItem eventKey={1}>My Plants</NavItem>
             </LinkContainer>
             <LinkContainer to={{ pathname: '/profile' }}>
