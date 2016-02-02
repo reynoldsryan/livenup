@@ -10,11 +10,11 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 
 
 class NavBar extends Component {
-  styles: {
-    title: {
-      cursor: 'pointer'
-    }
-  }
+  // styles: {
+  //   title: {
+  //     cursor: 'pointer'
+  //   }
+  // }
 
   route (path) {
     this.props.push(path)
@@ -58,16 +58,14 @@ class NavBar extends Component {
       <AppBar
         showMenuIconButton = { false }
         title = {
-            <span style={this.styles.title}> LivenUp </span>
+            <span> LivenUp </span>
           }
         onTitleTouchTap = {() => {this.route('/')}}
         iconElementRight = {
           <FlatButton
-            onTouchTap = {() => {this.route('/myplants')}}
+            onTouchTap = {() => {this.route('/myspaces')}}
             label="My Spaces" />
           }
-        iconElementRight = { ()=> {this.logIn()} }
-        iconElementRight = { () => {this.logOut()} }
       />
     );
   }
@@ -75,6 +73,11 @@ class NavBar extends Component {
 
 injectTapEventPlugin();
 
-//bind and map everything 
+//bind and map everything
 
 export default connect(null, routeActions)(NavBar);
+
+
+
+// iconElementRight = { ()=> {this.logIn()} }
+// iconElementRight = { () => {this.logOut()} }
