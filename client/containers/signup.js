@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { PageHeader, Input, ButtonInput } from 'react-bootstrap';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { signupUser } from '../actions/auth_actions';
+import RaisedButton from 'material-ui/lib/raised-button';
+import TextField from 'material-ui/lib/text-field';
 
 class SignupForm extends Component {
   constructor(props) {
@@ -39,27 +40,24 @@ class SignupForm extends Component {
 
     return (
       <div>
-        <PageHeader>Sign Up</PageHeader>
+        <h2>Sign Up</h2>
         <form onSubmit={this.onFormSubmit}>
-          <Input
-            type='text'
-            label='Name'
-            placeholder='Enter your name'
-            value={this.state.name}
-            onChange={this.onNameChange} />
-          <Input
+          <TextField
             type='email'
-            label='Email Address'
-            placeholder='Enter your email address'
+            hintText='Enter your email address'
+            floatingLabelText='Email Address'
             value={this.state.email}
             onChange={this.onEmailChange} />
-          <Input
+            <br/>
+            <br/>
+          <TextField
             type='password'
-            label='Password'
-            placeholder='Enter your password'
+            floatingLabelText='Password'
+            hintText='Enter your password'
             value={this.state.password}
             onChange={this.onPasswordChange} />
-          <ButtonInput type='submit' bsStyle='primary' value="Submit" />
+            <br/>
+          <RaisedButton primary={true} type='submit' label="Submit" />
         </form>
       </div>
     );
