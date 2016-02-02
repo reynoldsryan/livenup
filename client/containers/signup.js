@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
-import { PageHeader, Input, ButtonInput } from 'react-bootstrap';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { signupUser } from '../actions/auth_actions';
+import TextField from 'material-ui/lib/text-field';
+import RaisedButton from 'material-ui/lib/raised-button';
+import FlatButton from 'material-ui/lib/flat-button';
+import Dialog from 'material-ui/lib/dialog';
 
 class SignupForm extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {name: '', email: '', password: ''};
+    this.state = {email: '', password: '', open: false};
 
-    this.onNameChange = this.onNameChange.bind(this);
     this.onEmailChange = this.onEmailChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
-  }
-
-  onNameChange(event) {
-    this.setState({ name: event.target.value });
+    this.handleOpen = this.handleOpen.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   onEmailChange(event) {
@@ -31,36 +31,61 @@ class SignupForm extends Component {
   onFormSubmit(event) {
     console.log(event);
     event.preventDefault();
-    this.props.signupUser(this.state.name, this.state.email, this.state.password);
-    this.setState({ name: '', email: '', password: '' });
+    this.props.signupUser(this.state.email, this.state.password);
+    this.setState({ email: '', password: '' });
+    this.handleClose();
+  }
+
+  handleOpen() {
+    console.log('this is', this);
+    this.setState({open: true});
+  }
+
+  handleClose() {
+    this.setState({open: false});
   }
 
   render() {
+    const actions = [
+      <FlatButton
+        label="Cancel"
+        secondary={true}
+        onTouchTap={this.handleClose} />,
+      <FlatButton
+        type="submit"
+        label="Submit"
+        primary={true}
+        keyboardFocused={true}
+        onTouchTap={this.onFormSubmit} />
+    ];
 
     return (
       <div>
-        <PageHeader>Sign Up</PageHeader>
-        <form onSubmit={this.onFormSubmit}>
-          <Input
-            type='text'
-            label='Name'
-            placeholder='Enter your name'
-            value={this.state.name}
-            onChange={this.onNameChange} />
-          <Input
-            type='email'
-            label='Email Address'
-            placeholder='Enter your email address'
-            value={this.state.email}
-            onChange={this.onEmailChange} />
-          <Input
-            type='password'
-            label='Password'
-            placeholder='Enter your password'
-            value={this.state.password}
-            onChange={this.onPasswordChange} />
-          <ButtonInput type='submit' bsStyle='primary' value="Submit" />
-        </form>
+      <RaisedButton label="Sign Up" onTouchTap={this.handleOpen} />
+        <Dialog
+          title="Sign Up"
+          actions={actions}
+          modal={false}
+          open={this.state.open}
+          onRequestClose={this.handleClose}>
+            <form onSubmit={this.onFormSubmit}>
+              <TextField
+                type='email'
+                hintText='Enter your email address'
+                floatingLabelText='Email Address'
+                value={this.state.email}
+                onChange={this.onEmailChange} />
+              <br/>
+              <br/>
+              <TextField
+                type='password'
+                hintText='Enter your password'
+                floatingLabelText='Password'
+                value={this.state.password}
+                onChange={this.onPasswordChange} />
+              <br/>
+            </form>
+        </Dialog>
       </div>
     );
   }

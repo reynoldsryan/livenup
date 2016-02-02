@@ -32,6 +32,7 @@ router.post('/signup', (req, res) => {
       res.status(400);
       res.send(err);
     });
+  })
 
 router.use('/plot', plots);
 router.use('/plant', plants);
