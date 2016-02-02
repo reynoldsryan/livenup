@@ -9,6 +9,8 @@ export const UPDATE_PLOT = 'UPDATE_PLOT';
 export const ADD_PLANT = 'ADD_PLANT';
 export const REMOVE_PLANT = 'REMOVE_PLANT';
 
+export const SELECT_SPACE = 'SELECT_SPACE';
+
 let dummyData = {
   plants: [],
   plots : [
@@ -149,4 +151,12 @@ export function removePlant(targetPlotName, plotSpace) {
       plotSpace, plotSpace
     }
   }
+}
+
+export function selectSpace(spaceName) {
+
+  return {
+    type: SELECT_SPACE,
+    payload: spaceName
+  };
 }

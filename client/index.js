@@ -16,4 +16,4 @@ const store = createStoreWithMiddleware(reducers);
 ReactDOM.render(
   <Provider store={store}>
     <Router history={hashHistory} routes={routes} />
-  </Provider>, document.querySelector('.container-fluid'));
+  </Provider>, document.querySelector('.root'));
