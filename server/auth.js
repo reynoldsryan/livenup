@@ -25,7 +25,7 @@ module.exports = {  //add expires to payload, then check against
         }
       });
     });
-      return existingUser;
+    return existingUser;
   },
 
   checkUser (req, res, next) {
@@ -54,9 +54,9 @@ module.exports = {  //add expires to payload, then check against
         if(data) {
           let resolved = {token: token, data: data};
           resolve(resolved);
-        }
-        else {
+        } else {
           reject('Signup Error: this user already exists');
+        }
       });
     });
     return newUser;

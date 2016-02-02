@@ -1,41 +1,83 @@
 import React, { Component } from 'react';
-import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import AppBar from 'material-ui/lib/app-bar';
+import IconButton from 'material-ui/lib/icon-button';
+import FlatButton from 'material-ui/lib/flat-button';
 import { routeActions } from 'react-router-redux';
 import { connect } from 'react-redux';
+import { logoutUser } from '../actions/auth_actions';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
 
 
 class NavBar extends Component {
+  // styles: {
+  //   title: {
+  //     cursor: 'pointer'
+  //   }
+  // }
+
+  route (path) {
+    this.props.push(path)
+  }
+
+  logIn () {
+    if(this.props.token === null){
+      return(
+        <FlatButton
+          onTouchTap = { ()=>{this.route('/login')} }
+          label = "Log In"
+        />
+      )
+    }
+    else {
+      return (false)
+    }
+  }
+
+  logOut () {
+    if(this.props.toke === null ){
+      <FlatButton
+        onTouchTap = { ()=>{this.route('/signup')} }
+        label = "Sign Up"
+      />
+    }
+    else {
+      return(
+        <FlatButton
+          onTouchTap = { () => {this.props.logoutUser()} }
+          label="Log Out" />
+      )
+    }
+  }
+  constructor (props) {
+    super(props);
+    console.log('props in NavBar: ', props);
+  }
   render() {
     return (
-      <Navbar inverse>
-        <Navbar.Header>
-          <LinkContainer to={{ pathname: '/' }}>
-            <Navbar.Brand>LivenUp</Navbar.Brand>
-          </LinkContainer>
-          <Navbar.Toggle />
-        </Navbar.Header>
-        <Navbar.Collapse>
-          <Nav>
-            <LinkContainer to={{ pathname: '/myplants' }}>
-              <NavItem eventKey={1}>My Plants</NavItem>
-            </LinkContainer>
-            <LinkContainer to={{ pathname: '/profile' }}>
-              <NavItem eventKey={2}>Profile</NavItem>
-            </LinkContainer>
-          </Nav>
-          <Nav pullRight>
-            <LinkContainer to={{ pathname: '/login' }}>
-              <NavItem eventKey={3}>Log In</NavItem>
-            </LinkContainer>
-            <LinkContainer to={{ pathname: '/signup' }}>
-              <NavItem eventKey={4}>Sign Up</NavItem>
-            </LinkContainer>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
+      <AppBar
+        showMenuIconButton = { false }
+        title = {
+            <span> LivenUp </span>
+          }
+        onTitleTouchTap = {() => {this.route('/')}}
+        iconElementRight = {
+          <FlatButton
+            onTouchTap = {() => {this.route('/myspaces')}}
+            label="My Spaces" />
+          }
+      />
     );
   }
 }
 
+injectTapEventPlugin();
+
+//bind and map everything
+
 export default connect(null, routeActions)(NavBar);
+
+
+
+// iconElementRight = { ()=> {this.logIn()} }
+// iconElementRight = { () => {this.logOut()} }
