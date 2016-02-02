@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose');
 
-const plotSchema = new mongoose.Schema( {
+const spaceSchema = new mongoose.Schema( {
   name: {type: String},
   length: {type: Number},
   width: {type: Number},
@@ -10,18 +10,18 @@ const plotSchema = new mongoose.Schema( {
   user: {type: Array}
 });
 
-const Plot = mongoose.model('Plot', plotSchema);
+const Space = mongoose.model('Space', spaceSchema);
 
 module.exports = {
   find (user, callback) {
-    Plot.find({user: user}, (err, result) => {
+    Space.find({user: user}, (err, result) => {
       if(err) console.error(err);
       callback(result);
     });
   },
 
   add (name, length, width, plants, user, callback) {
-    let plot = new Plot({
+    let space = new Space({
       name: name,
       length: length,
       width: width,
@@ -29,20 +29,20 @@ module.exports = {
       user: user
     });
 
-    plot.save((err, result) => {
+    space.save((err, result) => {
       if(err) throw err;
       callback({
-        message: "Successfully added plot",
+        message: "Successfully added space",
         data: result
       });
     });
   },
 
   update (id, properties, callback) {
-    Plot.findById(id, (err, result) => {
+    Space.findById(id, (err, result) => {
       if(err) console.error(err);
       if(!result) {
-        callback({message: "Plot with " + id + " not found"});
+        callback({message: "Space with " + id + " not found"});
       }
       result.name = properties[0] || result.name;
       result.length = properties[1] || result.length;
@@ -53,7 +53,7 @@ module.exports = {
       result.save((err) => {
         if(err) console.error(err);
         callback({
-          message: "Successfully updated the plot",
+          message: "Successfully updated the space",
           data: result
         });
       });
@@ -61,10 +61,10 @@ module.exports = {
   },
 
   remove (id, callback) {
-    Plot.findOneAndRemove({_id: id}, (err, result) => {
+    Space.findOneAndRemove({_id: id}, (err, result) => {
       if(err) console.error(err);
       callback({
-        message: "Successfully deleted plot",
+        message: "Successfully deleted space",
         data: result
       });
     });
