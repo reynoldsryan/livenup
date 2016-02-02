@@ -12,7 +12,6 @@ import Dialog from 'material-ui/lib/dialog';
 class LoginForm extends Component {
   constructor(props) {
     super(props);
-    console.log('this in constructor is ', this);
 
     this.state = {email: '', password: '', open: false};
 
@@ -64,7 +63,7 @@ class LoginForm extends Component {
 
     return (
       <div>
-      <RaisedButton label="Dialog" onTouchTap={this.handleOpen} />
+      <RaisedButton label="Log In" onTouchTap={this.handleOpen} />
         <Dialog
           title="Log In"
           actions={actions}
@@ -88,7 +87,7 @@ class LoginForm extends Component {
                 onChange={this.onPasswordChange} />
               <br/>
             </form>
-          </Dialog>
+        </Dialog>
       </div>
     );
   }
