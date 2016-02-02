@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
-import { PageHeader, Input, ButtonInput } from 'react-bootstrap';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { loginUser } from '../actions/auth_actions';
+import Divider from 'material-ui/lib/divider';
+import TextField from 'material-ui/lib/text-field';
+import RaisedButton from 'material-ui/lib/raised-button';
+
+//TODO make this and sign up Dialog or Popover
 
 class LoginForm extends Component {
   constructor(props) {
@@ -34,21 +38,21 @@ class LoginForm extends Component {
 
     return (
       <div>
-        <PageHeader>Log In</PageHeader>
+        <h2>Log In</h2>
         <form onSubmit={this.onFormSubmit}>
-          <Input
+          <TextField
             type='text'
-            label='Email Address'
             placeholder='Enter your email address'
             value={this.state.email}
-            onChange={this.onEmailChange} />
-          <Input
+            onChange={this.onEmailChange} /><br/>
+          <br/>
+          <TextField
             type='password'
-            label='Password'
             placeholder='Enter your password'
             value={this.state.password}
             onChange={this.onPasswordChange} />
-          <ButtonInput type='submit' bsStyle='primary' value="Submit" />
+          <br/>
+          <RaisedButton primary={true} type='submit' label="Submit" />
         </form>
       </div>
     );
