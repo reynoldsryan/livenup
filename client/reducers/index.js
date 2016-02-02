@@ -5,6 +5,7 @@ import AuthReducer from './reducer_auth';
 import PlantsReducer from './reducer_plants';
 import ListOfSpaces from './reducer_listOfSpaces';
 import SelectedSpace from './reducer_selectSpace';
+import InspirationsReducer from './reducer_inspirations';
 
 const rootReducer = combineReducers({
   routing: routeReducer,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   plants: PlantsReducer,
   isAuthorized: AuthReducer,
   listOfSpaces: ListOfSpaces,
-  selectedSpace: SelectedSpace
+  selectedSpace: SelectedSpace,
+  inspirations: InspirationsReducer
 });
 
 export default rootReducer;
