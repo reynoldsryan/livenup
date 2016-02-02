@@ -75,6 +75,6 @@ class NavBar extends Component {
 
 injectTapEventPlugin();
 
-//bind and map everything
+//bind and map everything 
 
 export default connect(null, routeActions)(NavBar);
