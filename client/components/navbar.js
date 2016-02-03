@@ -8,13 +8,16 @@ import { connect } from 'react-redux';
 import { logoutUser } from '../actions/auth_actions';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import { bindActionCreators } from 'redux';
+import LogInForm from '../containers/login';
+import SignupForm from '../containers/signup';
 
 class NavBar extends Component {
   showLogInOut () {
     if(!this.props.token){
       return(
         <div>
-
+          <LogInForm />
+          <SignupForm />
         </div>
       )
     }
@@ -43,7 +46,7 @@ class NavBar extends Component {
     const logInOut = this.showLogInOut()
     return (
       <AppBar
-        class = 'nav-bar'
+        className = 'nav-bar'
         showMenuIconButton = { false }
         title = { <span> LivenUp </span> }
         containerElement = { <Link to='/' /> }

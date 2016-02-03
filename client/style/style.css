@@ -47,3 +47,7 @@ video {
 .grid-tile {
   cursor: pointer;
 }
+
+.nav-button {
+  color: white !important;
+}
