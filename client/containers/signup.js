@@ -61,7 +61,7 @@ class SignupForm extends Component {
 
     return (
       <div>
-      <RaisedButton label="Sign Up" onTouchTap={this.handleOpen} />
+      <FlatButton className='nav-button' label="Sign Up" onTouchTap={this.handleOpen} />
         <Dialog
           title="Sign Up"
           actions={actions}
