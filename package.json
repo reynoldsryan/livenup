@@ -43,8 +43,7 @@
   "scripts": {
     "test": "mocha --compilers js:babel-core/register --recursive",
     "test:watch": "npm test -- --watch",
-    "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
-    "postinstall": "./node_modules/bower/bin/bower install"
+    "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js"
   },
   "repository": {
     "type": "git",
