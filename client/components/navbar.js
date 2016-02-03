@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { logoutUser } from '../actions/auth_actions';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import { bindActionCreators } from 'redux';
-import LoginForm from '../containers/login';
+import LogInForm from '../containers/login';
 import SignupForm from '../containers/signup';
 
 class NavBar extends Component {
@@ -16,14 +16,10 @@ class NavBar extends Component {
     if(!this.props.token){
       return(
         <div>
-          <div className="mui-col-md-4">
-          <FlatButton
-            containerElement={<LoginForm />}
-          />
-          <FlatButton
-            containerElement={<SignupForm />}
-          />
-          </div>
+          <ul className="nav-right">
+            <li className="nav-button"><LogInForm /></li>
+            <li className="nav-button"><SignupForm /></li>
+          </ul>
         </div>
       )
     }

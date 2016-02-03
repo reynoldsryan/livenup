@@ -17,11 +17,22 @@ const plantSchema = new mongoose.Schema( {
 
 const Plant = mongoose.model('Plant', plantSchema);
 
+function queryPlants (names) {
+  let query = `this.name === ${names[0]}`;
+  for(let plant = 1 ; plant < names.length ; plant++){
+    query += ` || this.name === ${names[plant]}`;
+  }
+  return query += `;`;
+};
+
+
 module.exports = {
-  find (name, callback) {
-    Plant.find({name: name}, (err, result) => {
+  find (plants, callback) {
+    let queryString = queryPlants(plants);
+
+    Plant.find({ }, (err, result) => {
       if(err) console.error(err);
       callback(result);
-    })
+    }).$where( () => queryString );
   }
 }
