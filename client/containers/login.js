@@ -49,7 +49,7 @@ class LoginForm extends Component {
       <FlatButton
         label="Cancel"
         secondary={true}
-        onTouchTap={this.handleClose} />,
+        onTouchTap= {this.handleClose} />,
       <FlatButton
         type="submit"
         label="Submit"
@@ -60,7 +60,7 @@ class LoginForm extends Component {
 
     return (
       <div>
-      <RaisedButton label="Log In" onTouchTap={this.handleOpen} />
+      <FlatButton className='nav-button' label="Log In" onTouchTap={this.handleOpen} />
         <Dialog
           title="Log In"
           actions={actions}
