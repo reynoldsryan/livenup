@@ -22,7 +22,7 @@ class NavBar extends Component {
       return (
         <div>
           <FlatButton
-            containerElement={<Link to='/myspaces' />}
+            containerElement={<Link to='/mygreenspace' />}
             label = "My Spaces"
           />
           <FlatButton

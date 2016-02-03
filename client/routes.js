@@ -16,7 +16,7 @@ const checkAuth = (nextState, replace) => {
 export default (
 <Route path='/' component={App}>
   <IndexRoute component={Index} />
-  <Route path='myspaces' onEnter={checkAuth} component={MySpaces} />
+  <Route path='mygreenspace' onEnter={checkAuth} component={MySpaces} />
   <Route path='login' component={Login} />
   <Route path='signup' component={Signup} />
 </Route>
