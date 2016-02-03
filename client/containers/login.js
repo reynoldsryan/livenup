@@ -60,7 +60,7 @@ class LoginForm extends Component {
 
     return (
       <div>
-      <RaisedButton label="Log In" onTouchTap={this.handleOpen} />
+      <FlatButton label="Log In" textColor="white" onTouchTap={this.handleOpen} />
         <Dialog
           title="Log In"
           actions={actions}
