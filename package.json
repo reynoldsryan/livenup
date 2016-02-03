@@ -7,6 +7,7 @@
     "axios": "^0.9.1",
     "bcrypt": "^0.8.5",
     "body-parser": "^1.14.2",
+    "bower": "^1.7.7",
     "express": "4.13.4",
     "history": "^1.17.0",
     "jwt-simple": "0.4.1",
@@ -47,6 +48,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LivenUp/livenup.git"
+  },
+  "engines": {
+    "node": "5.0.0"
   },
   "author": "reaction-jackson",
   "license": "MIT",
