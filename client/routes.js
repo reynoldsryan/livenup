@@ -4,10 +4,11 @@ import { Route, IndexRoute } from 'react-router';
 import App from './components/app';
 import Index from './components/index';
 import MySpaces from './components/myspaces';
-import Inspirations from './containers/inspirations';
+import SpaceCreator  from "./containers/spaceCreator";
 import Login from './containers/login';
 import Signup from './containers/signup';
-import SpaceCreator  from "./containers/spaceCreator";
+import Inspirations from './containers/inspirations';
+
 
 const checkAuth = (nextState, replace) => {
   if(!localStorage.getItem('token')) {
@@ -23,6 +24,5 @@ export default (
   <Route path="spacecreator" component={SpaceCreator} />
   <Route path='login' component={Login} />
   <Route path='signup' component={Signup} />
-  <Route path='inspirations' component={Inspirations} />
 </Route>
 );
