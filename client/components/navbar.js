@@ -1,34 +1,62 @@
 import React, { Component } from 'react';
-import { Navbar, Nav, NavItem } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
-import { routeActions } from 'react-router-redux';
+import AppBar from 'material-ui/lib/app-bar';
+import IconButton from 'material-ui/lib/icon-button';
+import FlatButton from 'material-ui/lib/flat-button';
+import Dialog from 'material-ui/lib/dialog';
+import routeActions, { Link } from 'react-router-redux';
 import { connect } from 'react-redux';
-import LogInOut from './logInOut';
+import { logoutUser } from '../actions/auth_actions';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import { bindActionCreators } from 'redux';
 
 class NavBar extends Component {
+  showLogInOut () {
+    if(!this.props.token){
+      return(
+        <div>
+
+        </div>
+      )
+    }
+    else {
+      return (
+        <div>
+          <FlatButton
+            containerElement={<Link to='/mygreenspace' />}
+            label = "My Spaces"
+          />
+          <FlatButton
+            onTouchTap = { ()=>{ this.props.logoutUser()} }
+            label = "Log Out"
+          />
+        </div>
+      )
+    }
+  }
+
+  constructor (props) {
+    super(props);
+    console.log('+++| 89 | props in NavBar: ', props);
+  }
+
   render() {
+    const logInOut = this.showLogInOut()
     return (
-      <Navbar inverse>
-        <Navbar.Header>
-          <LinkContainer to={{ pathname: '/' }}>
-            <Navbar.Brand>LivenUp</Navbar.Brand>
-          </LinkContainer>
-          <Navbar.Toggle />
-        </Navbar.Header>
-        <Navbar.Collapse>
-          <Nav>
-            <LinkContainer to={{ pathname: '/myspaces' }}>
-              <NavItem eventKey={1}>My Plants</NavItem>
-            </LinkContainer>
-            <LinkContainer to={{ pathname: '/profile' }}>
-              <NavItem eventKey={2}>Profile</NavItem>
-            </LinkContainer>
-          </Nav>
-          <LogInOut />
-        </Navbar.Collapse>
-      </Navbar>
-    );
+      <AppBar
+        class = 'nav-bar'
+        showMenuIconButton = { false }
+        title = { <span> LivenUp </span> }
+        containerElement = { <Link to='/' /> }
+        iconElementRight = { logInOut }
+      />
+    )
   }
 }
 
-export default connect(null, routeActions)(NavBar);
+injectTapEventPlugin();
+
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({ logoutUser, Link }, dispatch)
+}
+
+export default connect(null, mapDispatchToProps)(NavBar);
