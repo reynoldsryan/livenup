@@ -52,7 +52,6 @@
   },
   "engines": {
     "node": "5.0.0"
-    }
   },
   "author": "reaction-jackson",
   "license": "MIT",
