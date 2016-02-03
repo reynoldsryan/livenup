@@ -7,18 +7,15 @@ import LoginForm from '../containers/login';
 import SignupForm from '../containers/signup';
 import { logoutUser } from '../actions/auth_actions';
 
-
 class LogInOut extends Component {
   render() {
     let element = <div></div>;
     if(this.props.token === null) {
       element =
-        <div>
-          <ul className="nav-right">
-            <li className="nav-button"><LoginForm /></li>
-            <li className="nav-button"><SignupForm /></li>
-          </ul>
-        </div>
+        <ul className="nav-right">
+          <li className="nav-button"><LoginForm /></li>
+          <li className="nav-button"><SignupForm /></li>
+        </ul>
     }
 
   if(this.props.token) {
