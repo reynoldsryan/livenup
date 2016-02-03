@@ -50,9 +50,11 @@ video {
 
 .nav-right {
   display:inline-block;
+  margin: 0px;
 }
 
 .nav-button {
   color: white !important;
   display:inline-block;
+  z-index: 1;
 }
