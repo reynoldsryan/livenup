@@ -6,7 +6,6 @@ import { bindActionCreators } from 'redux';
 import LogInOut from './logInOut';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
-
 class NavBar extends Component {
   constructor (props) {
     super(props);

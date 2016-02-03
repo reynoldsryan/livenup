@@ -14,8 +14,10 @@ class LogInOut extends Component {
     if(this.props.token === null) {
       element =
         <div>
-          <LoginForm />
-          <SignupForm />
+          <ul className="nav-right">
+            <li className="nav-button"><LoginForm /></li>
+            <li className="nav-button"><SignupForm /></li>
+          </ul>
         </div>
     }
 

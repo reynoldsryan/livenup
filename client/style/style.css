@@ -48,6 +48,11 @@ video {
   cursor: pointer;
 }
 
+.nav-right {
+  display:inline-block;
+}
+
 .nav-button {
   color: white !important;
+  display:inline-block;
 }
