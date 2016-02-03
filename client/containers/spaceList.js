@@ -17,6 +17,7 @@ class SpaceList extends Component {
           key={space.title}
           title={space.title}
           titlePosition='top'
+          className='grid-tile'
           onClick={() => this.props.selectSpace(space.title)}>
           <img src={space.img} />
         </GridTile>

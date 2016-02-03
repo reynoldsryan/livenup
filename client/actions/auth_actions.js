@@ -42,7 +42,7 @@ export function loginUser(email, password) {
 }
 
 export function logoutUser() {
-  return{
+  return {
     type: LOGOUT_USER
   };
 }
