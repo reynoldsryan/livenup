@@ -20,9 +20,9 @@ export default (
   <IndexRoute component={Index} />
   <Route path='inspirations' component={Inspirations} />
   <Route path='mygreenspace' onEnter={checkAuth} component={MySpaces} />
+  <Route path="spacecreator" component={SpaceCreator} />
   <Route path='login' component={Login} />
   <Route path='signup' component={Signup} />
-
-  <Route path="spacecreator" component={SpaceCreator} />
+  <Route path='inspirations' component={Inspirations} />
 </Route>
 );
