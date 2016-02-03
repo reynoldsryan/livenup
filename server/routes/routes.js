@@ -2,9 +2,10 @@
 
 const express = require('express');
 const auth = require('./../auth');
-const plots = require('./plots');
+const spaces = require('./spaces');
 const plants = require('./plants');
 const users = require('./users');
+const inspire = require('./inspirations')
 
 const router = express.Router();
 
@@ -34,9 +35,9 @@ router.post('/signup', (req, res) => {
     });
   })
 
-router.use('/plot', plots);
+router.use('/space', spaces);
 router.use('/plant', plants);
 router.use('/user', users);
-
+router.use('/inspirations', inspire);
 
 module.exports = router;

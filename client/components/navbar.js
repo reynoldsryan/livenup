@@ -2,82 +2,61 @@ import React, { Component } from 'react';
 import AppBar from 'material-ui/lib/app-bar';
 import IconButton from 'material-ui/lib/icon-button';
 import FlatButton from 'material-ui/lib/flat-button';
-import { routeActions } from 'react-router-redux';
+import Dialog from 'material-ui/lib/dialog';
+import routeActions, { Link } from 'react-router-redux';
 import { connect } from 'react-redux';
 import { logoutUser } from '../actions/auth_actions';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-
-
+import { bindActionCreators } from 'redux';
 
 class NavBar extends Component {
-  // styles: {
-  //   title: {
-  //     cursor: 'pointer'
-  //   }
-  // }
-
-  route (path) {
-    this.props.push(path)
-  }
-
-  logIn () {
-    if(this.props.token === null){
+  showLogInOut () {
+    if(!this.props.token){
       return(
-        <FlatButton
-          onTouchTap = { ()=>{this.route('/login')} }
-          label = "Log In"
-        />
+        <div>
+
+        </div>
       )
     }
     else {
-      return (false)
-    }
-  }
-
-  logOut () {
-    if(this.props.toke === null ){
-      <FlatButton
-        onTouchTap = { ()=>{this.route('/signup')} }
-        label = "Sign Up"
-      />
-    }
-    else {
-      return(
-        <FlatButton
-          onTouchTap = { () => {this.props.logoutUser()} }
-          label="Log Out" />
+      return (
+        <div>
+          <FlatButton
+            containerElement={<Link to='/myspaces' />}
+            label = "My Spaces"
+          />
+          <FlatButton
+            onTouchTap = { ()=>{ this.props.logoutUser()} }
+            label = "Log Out"
+          />
+        </div>
       )
     }
   }
+
   constructor (props) {
     super(props);
-    console.log('props in NavBar: ', props);
+    console.log('+++| 89 | props in NavBar: ', props);
   }
+
   render() {
+    const logInOut = this.showLogInOut()
     return (
       <AppBar
+        class = 'nav-bar'
         showMenuIconButton = { false }
-        title = {
-            <span> LivenUp </span>
-          }
-        onTitleTouchTap = {() => {this.route('/')}}
-        iconElementRight = {
-          <FlatButton
-            onTouchTap = {() => {this.route('/myspaces')}}
-            label="My Spaces" />
-          }
+        title = { <span> LivenUp </span> }
+        containerElement = { <Link to='/' /> }
+        iconElementRight = { logInOut }
       />
-    );
+    )
   }
 }
 
 injectTapEventPlugin();
 
-//bind and map everything
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({ logoutUser, Link }, dispatch)
+}
 
-export default connect(null, routeActions)(NavBar);
-
-
-
-// iconElementRight = { ()=> {this.logIn()} }
-// iconElementRight = { () => {this.logOut()} }
+export default connect(null, mapDispatchToProps)(NavBar);
