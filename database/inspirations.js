@@ -8,7 +8,7 @@ const inspireRoomsSchema = new mongoose.Schema( {
   temperature: {type: String}
 });
 
-const Rooms = mongoose.model('Rooms', inspireRoomsSchema)
+const Rooms = mongoose.model('spaces', inspireRoomsSchema)
 
 const inspireImagesSchema = new mongoose.Schema( {
   inspiration_name: {type: String},
@@ -17,7 +17,7 @@ const inspireImagesSchema = new mongoose.Schema( {
   plants: {type: Array}
 })
 
-const Images = mongoose.model('Images', inspireImagesSchema)
+const Images = mongoose.model('space_inspirations', inspireImagesSchema)
 
 module.exports = {
   getRooms (callback) {
