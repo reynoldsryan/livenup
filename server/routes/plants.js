@@ -7,9 +7,9 @@ const router = express.Router();
 
 router.route('/', auth.checkUser)
   .get((req, res) => {
-    let _plant = req.query.plant;
+    let _plants = req.query.plant;
 
-    plant.find(_plant, function(data){
+    plant.find(_plants, function(data){
       res.send(data);
     })
   })
