@@ -7,13 +7,17 @@ import MySpaces from './components/myspaces';
 import Login from './containers/login';
 import Signup from './containers/signup';
 
+const checkAuth = (nextState, replace) => {
+  if(!localStorage.getItem('token')) {
+    replace({ pathname: '/login' });
+  }
+};
+
 export default (
 <Route path='/' component={App}>
   <IndexRoute component={Index} />
-  <Route path='myspaces' component={MySpaces} />
+  <Route path='mygreenspace' onEnter={checkAuth} component={MySpaces} />
   <Route path='login' component={Login} />
   <Route path='signup' component={Signup} />
 </Route>
 );
-
-//TODO: add onEnter to verify token exists when trying to access views requiring authentication

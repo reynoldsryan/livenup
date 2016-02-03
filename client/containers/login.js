@@ -7,8 +7,6 @@ import RaisedButton from 'material-ui/lib/raised-button';
 import FlatButton from 'material-ui/lib/flat-button';
 import Dialog from 'material-ui/lib/dialog';
 
-//TODO make this and sign up Dialog or Popover
-
 class LoginForm extends Component {
   constructor(props) {
     super(props);
@@ -31,7 +29,6 @@ class LoginForm extends Component {
   }
 
   onFormSubmit(event) {
-    console.log(event);
     event.preventDefault();
     this.props.loginUser(this.state.email, this.state.password);
     this.setState({ email: '', password: '' });
