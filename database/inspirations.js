@@ -1,7 +1,5 @@
 'use strict'
-
 const mongoose = require('mongoose');
-const plots = require('./plots');
 
 const inspireRoomsSchema = new mongoose.Schema( {
   name: {type: String},
