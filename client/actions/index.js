@@ -39,11 +39,6 @@ export function fetchUserPlots() {
                       console.log('GET | error from server', response);
                     }
                   });
-
-  // return {
-  //   type: FETCH_USER_PLOTS,
-  //   payload: fakeRequest
-  // }
   return {
     type: FETCH_USER_PLOTS,
     payload: request

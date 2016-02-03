@@ -26,15 +26,16 @@ class Inspirations extends Component {
   }
   componentWillMount() {
     console.log('+++ line 28 inside inspirations.js this.props value => ', this.props);
-    this.props.fetchInspirations();
+    if(!this.props.selectedSpace) { return console.error('Selected Space is NULL') };
+    this.props.fetchInspirations(this.props.selectedSpace);
   }
    inspirationMaker (inspiration) {
     return (
       <GridTile
-          key={inspiration.imageUrl}
+          //key={inspiration.image_url}
           title={inspiration.category}
           actionPosition="left"
-          titlePosition="top"
+          titlePosition="bottom"
           titleBackground="linear-gradient(to bottom, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
           cols={ 1 }
           rows={ 1 }
@@ -43,7 +44,7 @@ class Inspirations extends Component {
             {
               width: '100%'
             }
-          } src={ inspiration.imageUrl } />
+          } src={ inspiration.image_url } />
         </GridTile>
       )
   }
@@ -75,7 +76,8 @@ function mapDispatchToProps (dispatch) {
 function mapStateToProps (state) {
   console.log("in inspirations.js state value => ", state);
   return {
-      inspirations: state.inspirations || []
+      inspirations: state.inspirations || [],
+      selectedSpace: state.selectedSpace || null
     }
 }
 
