@@ -10,7 +10,7 @@ const spaceSchema = new mongoose.Schema( {
   user: {type: Array}
 });
 
-const Space = mongoose.model('Space', spaceSchema);
+const Space = mongoose.model('user_spaces', spaceSchema);
 
 module.exports = {
   find (user, callback) {
