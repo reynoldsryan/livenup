@@ -2,7 +2,6 @@
 //imports
 //////////////
 import axios from 'axios'; // to handle http requests to api
-
 //////////////
 //end imports
 //////////////
@@ -12,11 +11,12 @@ import axios from 'axios'; // to handle http requests to api
 /////////////////
 
 export const FETCH_SPACE_INSPIRATIONS = "FETCH_SPACE_INSPIRATIONS";
-//TODO replace hardcoded setTimeout with api call
 
-const request = axios.get('/inspirations', {
+export function fetchInspirations(room) {
+  console.log("+++ inspiration_actions.js value of passed arg room", room);
+const request = axios.post('/inspirations', {
     inspirations: {
-      category: bathroom
+      category: room
     }
   })
   .catch((response) => {
@@ -25,8 +25,7 @@ const request = axios.get('/inspirations', {
     } else {
       console.log('GET | error from server', response);
     }
-  });
-
+  })
 return {
   type: FETCH_SPACE_INSPIRATIONS,
   payload: request
