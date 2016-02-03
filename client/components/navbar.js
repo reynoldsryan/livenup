@@ -16,8 +16,10 @@ class NavBar extends Component {
     if(!this.props.token){
       return(
         <div>
-          <LogInForm />
-          <SignupForm />
+          <ul className="nav-right">
+            <li className="nav-button"><LogInForm /></li>
+            <li className="nav-button"><SignupForm /></li>
+          </ul>
         </div>
       )
     }
