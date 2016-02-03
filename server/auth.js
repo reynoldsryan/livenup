@@ -28,7 +28,7 @@ module.exports = {  //add expires to payload, then check against
     return existingUser;
   },
 
-  checkUser (req, res, next) {return next();
+  checkUser (req, res, next) {
     let _token = req.headers.token;
     let _decoded = jwt.decode(_token, secret.salt);
 
