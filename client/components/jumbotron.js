@@ -9,7 +9,6 @@ export default class VideoJumbotron extends Component {
             <source src='../../assets/Greenhouse.mp4' type='video/mp4' />
           </video>
         </div>
-        <h3 className='jumbotron-heading'>Add life to your life.</h3>
       </div>
     );
   }
