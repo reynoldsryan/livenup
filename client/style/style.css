@@ -67,3 +67,20 @@ video {
   display:inline-block;
   z-index: 1;
 }
+
+.footer {
+  display: block;
+  height: 50px;
+  width: 100%;
+  margin: 20px 0;
+  padding: 50px 0 20px 0;
+  text-align: center;
+}
+
+.footer-elements {
+  margin-left: 30px;
+}
+
+.fa {
+  color: rgb(97,155,101);
+}

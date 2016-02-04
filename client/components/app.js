@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import NavBar from './navbar';
 import SpaceCreator  from "../containers/spaceCreator";
+import Footer from './footer';
 
 export default class App extends Component {
   render() {
@@ -9,6 +10,7 @@ export default class App extends Component {
       <div>
         <NavBar />
         {this.props.children}
+        <Footer />
       </div>
     );
   }
