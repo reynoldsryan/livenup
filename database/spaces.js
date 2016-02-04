@@ -3,11 +3,14 @@
 const mongoose = require('mongoose');
 
 const spaceSchema = new mongoose.Schema( {
-  name: {type: String},
-  length: {type: Number},
-  width: {type: Number},
-  plants: {type: Array},
-  user: {type: Array}
+  space_name: {type: String},
+  space_useremail: {type: String},
+  space_image: {type: String},
+  category: {type: String},
+  light: {type: String},
+  humidity: {type: String},
+  tempurature: {type: String},
+  space_plants: {type: Array},
 });
 
 const Space = mongoose.model('user_spaces', spaceSchema);
@@ -20,13 +23,16 @@ module.exports = {
     });
   },
 
-  add (name, length, width, plants, user, callback) {
+  add (properties, callback) {
     let space = new Space({
-      name: name,
-      length: length,
-      width: width,
-      plants: plants,
-      user: user
+      space_name: properties[0],
+      space_useremail: properties[1],
+      space_image: properties[2],
+      category: properties[3],
+      light: properties[4],
+      humidity: properties[5],
+      temperature: properties[6],
+      space_plants: properties[7]
     });
 
     space.save((err, result) => {
@@ -44,11 +50,14 @@ module.exports = {
       if(!result) {
         callback({message: "Space with " + id + " not found"});
       }
-      result.name = properties[0] || result.name;
-      result.length = properties[1] || result.length;
-      result.width = properties[2] || result.width;
-      result.plants = properties[3] || result.plants;
-      result.user = properties[4] || result.user;
+      result.space_name = properties[0] || result.space_name;
+      result.space_useremail = properties[1] || result.space_useremail;
+      result.space_image = properties[2] || result.space_image;
+      result.category = properties[3] || result.category;
+      result.light = properties[4] || result.light;
+      result.humidity = properties[5] || result.humidity;
+      result.temperature = properties[6] || result.temperature;
+      result.space_plants = properties[7] || result.space_plants;
 
       result.save((err) => {
         if(err) console.error(err);
@@ -69,4 +78,4 @@ module.exports = {
       });
     });
   }
-}
+};
