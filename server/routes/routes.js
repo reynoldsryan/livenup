@@ -20,7 +20,6 @@ router.post('/login', (req, res) => {
       res.send(err);
     });
   });
-
 router.post('/signup', (req, res) => {
   auth.addUser(req, res)
     .then((promise) => {
@@ -38,6 +37,6 @@ router.post('/signup', (req, res) => {
 router.use('/space', spaces);
 router.use('/plant', plants);
 router.use('/user', users);
-// router.use('/inspirations', inspire);
+router.use('/inspirations', inspire);
 
 module.exports = router;
