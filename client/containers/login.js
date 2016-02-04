@@ -49,7 +49,7 @@ class LoginForm extends Component {
       <FlatButton
         label="Cancel"
         secondary={true}
-        onTouchTap={this.handleClose} />,
+        onTouchTap= {this.handleClose} />,
       <FlatButton
         type="submit"
         label="Submit"

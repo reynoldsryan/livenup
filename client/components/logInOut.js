@@ -1,29 +1,37 @@
 import React, { Component } from 'react';
-import { Nav, NavItem } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import routeActions, { push } from 'react-router-redux';
+import FlatButton from 'material-ui/lib/flat-button';
+import LoginForm from '../containers/login';
+import SignupForm from '../containers/signup';
 import { logoutUser } from '../actions/auth_actions';
 
 class LogInOut extends Component {
-render() {
-  let element = null;
-  if(this.props.token === null) {
-    element =
-    <Nav pullRight>
-      <LinkContainer to={{ pathname: '/login' }}>
-        <NavItem eventKey={3}>Log In</NavItem>
-      </LinkContainer>
-      <LinkContainer to={{ pathname: '/signup' }}>
-        <NavItem eventKey={4}>Sign Up</NavItem>
-      </LinkContainer>
-    </Nav>;
+  render() {
+    let element = <div></div>;
+    if(this.props.token === null) {
+      element =
+        <ul className="nav-right">
+          <li className="nav-button"><LoginForm /></li>
+          <li className="nav-button"><SignupForm /></li>
+        </ul>
     }
+
   if(this.props.token) {
     element =
-    <Nav pullRight>
-      <NavItem onClick={this.props.logoutUser} eventKey={3}>Log Out</NavItem>
-    </Nav>;
+      <div>
+        <FlatButton
+          onTouchTap = { () => this.props.push('/mygreenspace') }
+          label = "My Spaces"
+          className = "nav-button"
+        />
+        <FlatButton
+          onTouchTap = { ()=> this.props.logoutUser() }
+          label = "Log Out"
+          className = "nav-button"
+        />
+      </div>
     }
   return element;
   }
@@ -36,7 +44,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ logoutUser }, dispatch);
+  return bindActionCreators({ logoutUser, push }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LogInOut);
