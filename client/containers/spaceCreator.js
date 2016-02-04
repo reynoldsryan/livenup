@@ -113,11 +113,11 @@ export default class SpaceCreator extends Component {
   handleSave() {
     const createdSpaceToSave = {
       user: 'userId',
-      name: this.state.spaceName,
+      SPACE_name: this.state.spaceName,
       category: this.state.category,
-      sunLevel: this.state.sunLevel,
-      humidityLevel: this.state.humidityLevel,
-      tempLevel: this.state.tempLevel,
+      light: this.state.sunLevel,
+      humidity: this.state.humidityLevel,
+      temp: this.state.tempLevel,
       plants: this.state.selectedPlants
     }
 
