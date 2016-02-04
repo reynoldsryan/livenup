@@ -11,6 +11,7 @@ import axios from 'axios'; // to handle http requests to api
 /////////////////
 
 export const FETCH_SPACE_INSPIRATIONS = "FETCH_SPACE_INSPIRATIONS";
+export const SELECT_SPACE_INSPIRATION = "SELECT_SPACE_INSPIRATION";
 
 export function fetchInspirations(room) {
   console.log("+++ inspiration_actions.js value of passed arg room", room);
@@ -35,3 +36,17 @@ return {
 //////////////////
 //end fetch
 ////////////////
+
+///////////////
+// select inspiration
+///////////////
+export function selectedInspiration(selectedInspiration) {
+  return {
+    type : SELECT_SPACE_INSPIRATION,
+    payload: selectedInspiration
+  };
+}
+
+/////////////
+//end select
+////////////

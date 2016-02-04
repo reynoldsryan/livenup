@@ -6,6 +6,7 @@ import GridTile from 'material-ui/lib/grid-list/grid-tile';
 //import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 import IconButton from 'material-ui/lib/icon-button';
 import { fetchInspirations } from '../actions/inspiration_actions';
+import routeActions, { push } from 'react-router-redux';
 
 const styles = {
   root: {
