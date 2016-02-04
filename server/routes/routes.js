@@ -20,7 +20,6 @@ router.post('/login', (req, res) => {
       res.send(err);
     });
   });
-
 router.post('/signup', (req, res) => {
   auth.addUser(req, res)
     .then((promise) => {
