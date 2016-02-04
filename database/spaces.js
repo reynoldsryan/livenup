@@ -17,7 +17,7 @@ const Space = mongoose.model('user_spaces', spaceSchema);
 
 module.exports = {
   find (user, callback) {
-    Space.find({user: user}, (err, result) => {
+    Space.find({space_useremail: user}, (err, result) => {
       if(err) console.error(err);
       callback(result);
     });
