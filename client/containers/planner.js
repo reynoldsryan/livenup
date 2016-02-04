@@ -6,6 +6,9 @@ import { Modal, Button } from 'react-bootstrap';
 import { fetchUserPlots, addPlot , plantSearch } from '../actions/index';
 
 import Plot from './plot';
+
+import routeActions, { push } from 'react-router-redux';
+
 import AddPlotModal from '../components/addPlotModal';
 
 class Planner extends Component {
@@ -81,10 +84,12 @@ class Planner extends Component {
 
 function mapDispatchToProps(dispatch) {
   // console.log('state in planner.js from fn()mapDispatchTopProps', dispatch);
-  return bindActionCreators({ fetchUserPlots, addPlot, plantSearch}, dispatch);
+  console.log('+++++routeActions in planner.js routeActions', push);
+  return bindActionCreators({ fetchUserPlots, addPlot, plantSearch, push}, dispatch);
 }
 
 function mapStateToProps({ userPlots }) {
+
   if(userPlots) {
     return { plots: userPlots.plots, fetched: true };
   }

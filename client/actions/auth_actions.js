@@ -4,9 +4,8 @@ export const SIGNUP_USER = 'SIGNUP_USER';
 export const LOGIN_USER = 'LOGIN_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
 
-export function signupUser(name, email, password) {
+export function signupUser(email, password) {
   const request = axios.post('/signup', {user: {
-    name: name,
     email: email,
     password: password
   }}).catch((response) => {
@@ -42,7 +41,7 @@ export function loginUser(email, password) {
 }
 
 export function logoutUser() {
-  return{
+  return {
     type: LOGOUT_USER
   };
 }
