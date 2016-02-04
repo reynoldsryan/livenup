@@ -12,7 +12,7 @@ router.route('/')
   })
   .post((req, res) => {
     let _category = req.body.inspirations.category;
-    console.log(`value of body in inspirations.js => `, req.body);
+    //console.log(`value of body in inspirations.js => `, req.body);
     inspire.getImages(_category, function(data){
       res.send(data);
     });
