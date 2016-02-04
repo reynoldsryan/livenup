@@ -14,7 +14,6 @@ module.exports = {
       loader: 'babel'
     }]
   },
-  devtool: 'eval',
   resolve: {
     extensions: ['', '.js', '.jsx']
   }
