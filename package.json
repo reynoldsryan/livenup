@@ -30,6 +30,7 @@
     "router": "^1.1.4",
     "webpack": "^1.12.12",
     "webpack-dev-server": "^1.14.1",
+    "babel": "^5.8.20",
     "babel-cli": "^6.4.5",
     "babel-core": "^6.4.5",
     "babel-loader": "^6.2.1",
@@ -45,11 +46,13 @@
     "babel-preset-es2015-node": "^5.0.2",
     "babel-preset-react": "^6.3.13",
     "chai": "^3.5.0",
-    "mocha": "^2.4.5"
+    "mocha": "^2.4.5",
+    "webpack-dev-server": "^1.14.1",
   },
   "scripts": {
     "test": "mocha --compilers js:babel-core/register --recursive",
     "test:watch": "npm test -- --watch",
+    "postinstall": "webpack --config ./webpack-prod.config.js --progress --colors",
     "start": "node server/index.js"
   },
   "repository": {
