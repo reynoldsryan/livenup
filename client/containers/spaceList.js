@@ -19,7 +19,7 @@ class SpaceList extends Component {
           key={space.title}
           title={space.title}
           titlePosition='top'
-          className='grid-tile, four wide column'
+          className='grid-tile'
           onClick={() => this.props.selectSpace(space.title)}>
           <img src={space.img} />
         </GridTile>
@@ -32,7 +32,7 @@ class SpaceList extends Component {
       <div className='ui grid'>
         <div className='two wide column'></div>
         <div className='twelve wide column'>
-          <GridList cols={3} cellHeight={300} className='grid-list' onClick={() => this.props.push('/inspirations')}>
+          <GridList cols={3} cellHeight={200} className='grid-list' onClick={() => this.props.push('/inspirations')}>
               {this.renderList()}
           </GridList>
         </div>
