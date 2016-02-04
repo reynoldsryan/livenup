@@ -24,7 +24,7 @@ class LogInOut extends Component {
       <div>
         <FlatButton
           onTouchTap = { () => this.props.push('/mygreenspace') }
-          label = "My Spaces"
+          label = "My Greenspace"
           className = "nav-button"
         />
         <FlatButton
