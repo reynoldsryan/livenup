@@ -8,6 +8,7 @@ export default class Index extends Component {
     return (
       <div>
         <VideoJumbotron />
+        <HowToSteps />
         <SpaceList />
       </div>
     );
