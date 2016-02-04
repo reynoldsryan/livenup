@@ -13,7 +13,7 @@ router.route('/')
     let _token = req.headers.token;
     let _decoded = jwt.decode(_token, secret.salt);
     let _user = _decoded.email;
-    
+
     space.find(_user, function(data){
       res.send(data);
     });
