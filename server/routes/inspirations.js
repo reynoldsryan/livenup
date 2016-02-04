@@ -5,10 +5,10 @@ const inspire = require('../../database/inspirations');
 const router = express.Router();
 
 router.route('/')
-  .get((req, res) =>  {
+  .get((req, res) => {
     inspire.getRooms(function(data){
       res.send(data);
-    });
+    })
   })
   .post((req, res) => {
     let _category = req.body.inspirations.category;

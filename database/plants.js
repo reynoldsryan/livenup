@@ -25,7 +25,6 @@ function queryPlants (names) {
   return query += `;`;
 };
 
-
 module.exports = {
   find (plants, callback) {
     let queryString = queryPlants(plants);
