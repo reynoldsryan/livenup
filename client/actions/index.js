@@ -31,7 +31,16 @@ export function fetchUserPlots() {
   //     resolve({data: dummyData});
   //   }, 500);
   // });
-  const request = axios.get('/plot', {params: {user: 'erik@gmail.com'}})
+  let self = this;
+  var token =  window.localStorage.getItem('token');
+  if(!token) {
+    return {
+      type: FETCH_USER_PLOTS,
+      payload: undefined
+    }
+  }
+  let ax = axios.create({headers: {'token' : token}});
+  const request = ax.get('/plot', {params: {user: 'erik@gmail.com'}})
                   .catch((response) => {
                     if(response  instanceof Error) {
                       console.error('GET | Error sending reponse',response);
@@ -61,7 +70,7 @@ export function plantSearch(plant) {
 
 export function addPlot(newPlot) {
   // console.log('calling addPlot in actions/index.js with arg', newPlot);
-  let ax = axios.create({timeout: 2000});
+  let ax = axios.create({headers: {'token' : token}});
   const request = ax.post('/plot', {
       user: {"email": 'erik@gmail.com'},
       plot: newPlot
@@ -85,7 +94,7 @@ export function addPlot(newPlot) {
 }
 
 export function removePlot(plotId) {
-  let ax = axios.create({timeout: 2000});
+  let ax = axios.create({headers: {'token' : token}});
   const request = ax.delete('/plot', {params: {id: plotId}})
                   .catch((response) => {
                     if(response  instanceof Error) {
@@ -106,7 +115,7 @@ export function removePlot(plotId) {
 
 export function updatePlot(updatedPlot) {
   // console.log('TRYING TO UPDATE PLOT',updatePlot);
-  let ax = axios.create({timeout: 2000});
+  let ax = axios.create({headers: {'token' : token}});
   const request = ax.put('/plot', {
                       user: 'erik@gmail.com',
                       plot: updatedPlot

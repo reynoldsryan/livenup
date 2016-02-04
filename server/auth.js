@@ -17,7 +17,7 @@ module.exports = {  //add expires to payload, then check against
         let payload = {email: _email, scope: secret.scope};
         let token = jwt.encode(payload, secret.salt);
 
-        if(bcrypt.compareSync(req.body.user.password, data[0].password)) {
+        if(data.length && bcrypt.compareSync(req.body.user.password, data[0].password)) {
           resolve({token: token, data: data});
         }
         else {
@@ -28,7 +28,7 @@ module.exports = {  //add expires to payload, then check against
     return existingUser;
   },
 
-  checkUser (req, res, next) {
+  checkUser (req, res, next) {return next();
     let _token = req.headers.token;
     let _decoded = jwt.decode(_token, secret.salt);
 
@@ -40,7 +40,7 @@ module.exports = {  //add expires to payload, then check against
 
   addUser (req, res) {
     let newUser = new Promise ((resolve, reject) => {
-      console.log('----| in signup Auth: ', req.body.user);
+      console.log('----| in signup Auth: ', req.body);
 
       let _email = req.body.user.email;
       let _password = bcrypt.hashSync(req.body.user.password, salt);
