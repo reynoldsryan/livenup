@@ -1,25 +1,30 @@
 .nav-bar {
   cursor: 'pointer';
   background-color: transparent !important;
+  box-shadow: none !important;
 }
 
 .nav-button {
   color: white !important;
+  z-index: 1;
 }
 
 .video-container {
-  height: 725px;
+  height: 650px;
   width: 100%;
   overflow: hidden;
+  margin-top: -80px;
 }
 
 video {
   width: 100%;
+  z-index: -1;
 }
 
 .grid-list {
   width: 100%
   height: 900px;
+  padding-top: 100px;
 }
 
 .grid-tile {
