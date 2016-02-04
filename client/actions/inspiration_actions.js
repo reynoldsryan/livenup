@@ -40,7 +40,7 @@ return {
 ///////////////
 // select inspiration
 ///////////////
-export function selectedInspiration(selectedInspiration) {
+export function selectInspiration(selectedInspiration) {
   return {
     type : SELECT_SPACE_INSPIRATION,
     payload: selectedInspiration
