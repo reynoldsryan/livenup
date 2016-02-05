@@ -8,7 +8,7 @@ export function createSpace(newSpace) {
   if(!newSpace){
     return console.error('ERROR newSpace is falsey:',newSpace);
   }
-  var token =  window.localStorage.getItem('token');
+  let token =  window.localStorage.getItem('token');
   let ax = axios.create({headers: {'token': token}})
   const request = ax.post('/spaces', {
     space: newSpace
