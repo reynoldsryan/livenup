@@ -1,22 +1,52 @@
+//////////////
+//imports
+//////////////
+import axios from 'axios'; // to handle http requests to api
+//////////////
+//end imports
+//////////////
+
+/////////////////
+//Fetch inspirations based on space selected in previous page
+/////////////////
+
 export const FETCH_SPACE_INSPIRATIONS = "FETCH_SPACE_INSPIRATIONS";
+export const SELECT_SPACE_INSPIRATION = "SELECT_SPACE_INSPIRATION";
 
-export const fetchInspirations = () => {
-  let request = new Promise(function (resolve, reject) {
-      setTimeout(function () {
-        console.log('+++ inspiration_actions.js about to resolve');
-        resolve ({
-              message: "Successfully returned faked data",
-              data: [{
-                imageUrl: 'http://www.lovethispic.com/uploaded_images/120311-Pretty-Flowers.jpg',
-                category: 'bathroom',
-                plants: ['flower1', 'flower2', 'flower3']
-              }]
-          })
-      }, 300);
-  });
-
-  return {
-    type: FETCH_SPACE_INSPIRATIONS,
-    payload: request
-  }
+export function fetchInspirations(room) {
+  //console.log("+++ inspiration_actions.js value of passed arg room", room);
+const request = axios.post('/inspirations', {
+    inspirations: {
+      category: room
+    }
+  })
+  .catch((response) => {
+    if (response instanceof Error) {
+      console.error('GET | Error sending reponse', response);
+    } else {
+      console.log('GET | error from server', response);
+    }
+  })
+return {
+  type: FETCH_SPACE_INSPIRATIONS,
+  payload: request
 }
+}
+
+//////////////////
+//end fetch
+////////////////
+
+///////////////
+// select inspiration
+///////////////
+export function selectInspiration(selectedInspiration) {
+  return {
+    type : SELECT_SPACE_INSPIRATION,
+    payload: selectedInspiration
+  };
+}
+
+/////////////
+//end select
+////////////

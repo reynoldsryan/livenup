@@ -7,6 +7,7 @@ import ListOfSpaces from './reducer_listOfSpaces';
 import SelectedSpace from './reducer_selectSpace';
 import InspirationsReducer from './reducer_inspirations';
 import UserSpacesReducer from './reducer_userSpaces.js';
+import InspirationSelectionReducer from './reducer_selectedInspiration';
 
 const rootReducer = combineReducers({
   routing: routeReducer,
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
   listOfSpaces: ListOfSpaces,
   selectedSpace: SelectedSpace,
   inspirations: InspirationsReducer,
-  userSpaces: UserSpacesReducer
+  userSpaces: UserSpacesReducer,
+  selectedInspiration: InspirationSelectionReducer
 });
 
 export default rootReducer;
