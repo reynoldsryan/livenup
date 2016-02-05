@@ -44,7 +44,6 @@
   "scripts": {
     "test": "mocha --compilers js:babel-core/register --recursive",
     "test:watch": "npm test -- --watch",
-    "start": "node ./server/index.js",
   },
   "repository": {
     "type": "git",
