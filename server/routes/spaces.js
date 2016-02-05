@@ -5,6 +5,7 @@ const auth = require('./../auth');
 const space = require('../../database/spaces');
 const plant = require('../../database/plants');
 const jwt = require('jwt-simple');
+const secret = require('./../utilities');
 
 const router = express.Router();
 
