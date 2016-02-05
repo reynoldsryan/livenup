@@ -8,7 +8,7 @@ import SpaceCreator  from "./containers/spaceCreator";
 import Login from './containers/login';
 import Signup from './containers/signup';
 import Inspirations from './containers/inspirations';
-
+import MyGreenSpaces from './containers/mygreenspaces';
 
 const checkAuth = (nextState, replace) => {
   if(!localStorage.getItem('token')) {
@@ -20,7 +20,7 @@ export default (
 <Route path='/' component={App}>
   <IndexRoute component={Index} />
   <Route path='inspirations' component={Inspirations} />
-  <Route path='mygreenspace' onEnter={checkAuth} component={MySpaces} />
+  <Route path='mygreenspace' onEnter={checkAuth} component={MyGreenSpaces} />
   <Route path='login' component={Login} />
   <Route path='signup' component={Signup} />
   <Route path="spacecreator" component={SpaceCreator} />
