@@ -14,11 +14,12 @@ import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
 import Paper from 'material-ui/lib/paper';
 
+import Login from './login';
 
 class Space extends Component {
   constructor(props) {
     super(props);
-    if(this.props.selectedInspiration) {
+    if(!this.props.fetchedSpace) {
       this.state = {
         editMode: false,
           image_url: this.props.selectedInspiration.image_url,
@@ -34,7 +35,7 @@ class Space extends Component {
       this.state = {
         editMode: false,
           image_url: this.props.fetchedSpace.space_image,
-          space_name: this.props.fetchedSpace.category,
+          space_name: this.props.fetchedSpace.space_name,
           category: this.props.fetchedSpace.category,
           light: this.props.fetchedSpace.light,
           humidity: this.props.fetchedSpace.humidity,
@@ -85,7 +86,7 @@ class Space extends Component {
   handleSave() {
     const space = {
       image_url: this.state.image_url,
-      space_name: this.state.category,
+      space_name: this.state.space_name,
       category: this.state.category,
       light: this.state.light,
       humidity: this.state.humidity,
@@ -107,9 +108,15 @@ class Space extends Component {
     //     <FlatButton label="Save" onTouchTap={() => this.handleSave} />
     //   );
     // }
+    let saveBtn;
+    if(!this.props.auth) {
+      saveBtn = <Login />
+    }else {
+      saveBtn = <FlatButton label="Save" onTouchTap={() => this.handleSave()} />
+    }
     return (
       <div>
-        <FlatButton label="Save" onTouchTap={() => this.handleSave()} />
+        {saveBtn}
         <FlatButton label="Edit" onTouchTap={() => this.setState({editMode: !this.state.editMode})} />
       </div>
 
