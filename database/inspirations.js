@@ -14,7 +14,7 @@ const inspireImagesSchema = new mongoose.Schema( {
 inspiration_name: {type: String},
 category: {type: String},
 image_url: {type: String},
-plants: {type: Array}
+plantsArray: {type: Array}
 });
 
 const Images = mongoose.model('space_inspirations', inspireImagesSchema)

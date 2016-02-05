@@ -31,7 +31,7 @@ module.exports = {  //add expires to payload, then check against
   checkUser (req, res, next) {return next();
     let _token = req.headers.token;
     let _decoded = jwt.decode(_token, secret.salt);
-
+    
     if(_decoded.scope === secret.scope){
       next();
     }
