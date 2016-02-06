@@ -11,6 +11,7 @@ const spaceSchema = new mongoose.Schema( {
   humidity: {type: String},
   tempurature: {type: String},
   space_plants: {type: Array},
+  inspiried_plants: {type: Array},
 });
 
 const Space = mongoose.model('user_spaces', spaceSchema);
@@ -32,7 +33,8 @@ module.exports = {
       light: properties[4],
       humidity: properties[5],
       temperature: properties[6],
-      space_plants: properties[7]
+      space_plants: properties[7],
+      inspiried_plants: properties[8]
     });
 
     space.save((err, result) => {
