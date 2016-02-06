@@ -31,7 +31,7 @@ router.route('/hardware')
        port: 8070,
        path: '/user/path/something',
        method: 'GET',
-       headers: { 'Content-Type': 'application/x-www-form-urlencoded'}
+       headers: { 'Content-Type': 'application/x-www-form-urlencoded'},
        body: {'userEmail': _decoded.email}
     }
 
