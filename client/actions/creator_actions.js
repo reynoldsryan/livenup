@@ -8,9 +8,11 @@ export function createSpace(newSpace) {
   if(!newSpace){
     return console.error('ERROR newSpace is falsey:',newSpace);
   }
+
+  console.log('newSpace to bed created', newSpace);
   var token =  window.localStorage.getItem('token');
-  let ax = axios.create({headers: {'token': token}})
-  const request = ax.post('/spaces', {
+  let ax = axios.create({headers: {'token': token}});
+  const request = ax.post('/space', {
     space: newSpace
   }).catch((response) => {
     if(response  instanceof Error) {
@@ -33,7 +35,7 @@ export function updateUserSpace(updatedSpace) {
 
   var token =  window.localStorage.getItem('token');
   let ax = axios.create({headers: {'token': token}})
-  const request = ax.put('/spaces', {
+  const request = ax.put('/space', {
     space: updatedSpace
   }).catch((response) => {
     if(response  instanceof Error) {
