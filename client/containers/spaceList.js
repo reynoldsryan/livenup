@@ -8,15 +8,18 @@ import routeActions, { push } from 'react-router-redux';
 
 const styles = {
   imagetile: {
-    width: '100%',
-    height: '100%',
-    'font-size': '200% !important',
-    'z-index': -1
+    'position': 'relative',
+    'zIndex': -1
   },
   gridtitle: {
-    'text-align': 'center',
-    'font-weight': 'bold',
-    'z-index': 1
+    'textAlign': 'center',
+    'fontSize': '25px',
+    'fontWeight': 'bold',
+    'position': 'absolute',
+    'top': '200%',
+    'left': '50%',
+    'transform': 'translate(-50%, -50%)',
+    'zIndex': 1
   }
 };
 
@@ -30,10 +33,10 @@ class SpaceList extends Component {
       return (
           <GridTile
             key={space.title}
-            titleBackground={false}
-            title={space.title}
+            titleBackground='false'
+            titlePosition='top'
+            title={<span style={styles.gridtitle}>{space.title}</span>}
             className='grid-tile'
-            style={styles.gridtitle}
             onClick={() => this.props.selectSpace(space.title)}>
             <img style={ styles.imagetile } src={space.img} />
           </GridTile>
