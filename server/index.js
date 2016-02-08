@@ -4,11 +4,16 @@ const express = require('express');
 const routes = require('./routes/routes.js');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const io = require('socket.io');
+const http = require('http');
+const testFunc = require('./sockets');
+
 
 mongoose.connect('mongodb://chuck:1qaz2wsx3edc4rfv@ds051595.mongolab.com:51595/heroku_d6g9mbk4');
-console.log(mongoose.connection.readyState);
+//console.log(mongoose.connection.readyState);
 
 const app = express();
+const server = http.createServer(app);
 const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
@@ -28,4 +33,10 @@ app.use(express.static(__dirname + '/../client/'));
 
 app.use('/', routes);
 
-app.listen(PORT, () => console.log('listening on port ', PORT));
+server.listen(PORT, () => console.log('listening on port ', PORT));
+
+const io = io(server);
+
+const exportIO = module.exports = function(){
+  return io;
+}
