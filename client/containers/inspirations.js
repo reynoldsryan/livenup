@@ -19,6 +19,7 @@ const styles = {
     width: '80%',
     overflowY: 'auto',
     marginBottom: 24,
+    cursor: 'pointer'
   },
 };
 
@@ -35,7 +36,6 @@ class Inspirations extends Component {
     return (
       <GridTile
           key={inspiration.image_url}
-          title={inspiration.category}
           actionPosition="left"
           titlePosition="bottom"
           titleBackground="linear-gradient(to bottom, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
@@ -57,12 +57,19 @@ class Inspirations extends Component {
   }
   render() {
     return (
-
+    <div>
+      <div className='sixteen column row'>
+        <div className='two wide column'></div>
+        <h2 className='twelve wide column, space-heading'>
+          ...find your inspiration...
+        </h2>
+        <div className='two wide column'></div>
+      </div>
       <div style={ styles.root }>
         <GridList
           cols={3}
-          cellHeight={200}
-          padding={1}
+          cellHeight={500}
+          padding={10}
           style={styles.gridList}
         >
         { this.props.inspirations.map((i) => {
@@ -70,6 +77,7 @@ class Inspirations extends Component {
         })
       }
         </ GridList>
+      </div>
       </div>
 
     )

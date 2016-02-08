@@ -8,8 +8,18 @@ import routeActions, { push } from 'react-router-redux';
 
 const styles = {
   imagetile: {
-    width: '100%',
-    height: '100%'
+    'position': 'relative',
+    'zIndex': -1
+  },
+  gridtitle: {
+    'textAlign': 'center',
+    'fontSize': '25px',
+    'fontWeight': 'bold',
+    'position': 'absolute',
+    'top': '200%',
+    'left': '50%',
+    'transform': 'translate(-50%, -50%)',
+    'zIndex': 1
   }
 };
 
@@ -23,12 +33,12 @@ class SpaceList extends Component {
       return (
           <GridTile
             key={space.title}
-            titleBackground={false}
-            title={space.title}
+            titleBackground='false'
+            titlePosition='top'
+            title={<span style={styles.gridtitle}>{space.title}</span>}
             className='grid-tile'
-            styles={{'font-size': '50px'}}
             onClick={() => this.props.selectSpace(space.title)}>
-            <img styles={ styles.imagetile } src={space.img} />
+            <img style={ styles.imagetile } src={space.img} />
           </GridTile>
       );
     });
@@ -40,7 +50,7 @@ class SpaceList extends Component {
         <div className='sixteen column row'>
           <div className='two wide column'></div>
           <h2 className='twelve wide column, space-heading'>
-            Pick a space - Find your inspiration - Bring it to life
+            Choose your space...
           </h2>
           <div className='two wide column'></div>
         </div>
