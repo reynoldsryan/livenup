@@ -20,7 +20,16 @@ export default class SpaceCreator extends Component {
 
   render() {
     return (
+      <div>
+      <div className='sixteen column row'>
+        <div className='two wide column'></div>
+        <h2 className='twelve wide column, space-heading'>
+          ...bring it to life.
+        </h2>
+        <div className='two wide column'></div>
+      </div>
       <Space create={this.handleCreate} selectedInspiration={this.props.selectedInspiration}/>
+      </div>
     );
   }
 }

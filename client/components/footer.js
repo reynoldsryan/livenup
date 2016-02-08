@@ -7,7 +7,7 @@ export default class Footer extends Component {
       <footer className="footer">
         <div className="col-md-12">
           <div className="footer-container">
-            <span className="footer-elements">&copy; LivenUp 2016&nbsp;</span>
+            <span>LivenUp&nbsp;</span>
               <a href="https://github.com/LivenUp/livenup" target="_blank"><i className="fa fa-github"></i></a>
             <span className="footer-elements">Genevieve Kolve&nbsp;</span>
               <a href="https://github.com/genevieve314" target="_blank"><i className="fa fa-github"></i></a>&nbsp;
