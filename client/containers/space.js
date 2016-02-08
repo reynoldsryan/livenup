@@ -161,7 +161,11 @@ class Space extends Component {
     if(!this.props.auth) {
       saveBtn = <Login />
     }else {
-      saveBtn = <FlatButton style={buttonStyles} label="Save" onTouchTap={() => this.handleSave()} />
+      if(!this.props.selectedInspiration){
+        saveBtn = <FlatButton style={buttonStyles} label="Update" onTouchTap={() => this.handleSave()} />
+      }else {
+        saveBtn = <FlatButton style={buttonStyles} label="Save" onTouchTap={() => this.handleSave()} />
+      }
     }
     return (
       <div style={{color: Colors.green50}}>
@@ -176,7 +180,7 @@ class Space extends Component {
   render() {
     return (
         <Card
-          style={padding: '10px'}
+          style={{padding: '10px'}}
           onExpandChange={() => this.setState({expanded: !this.state.expanded})}
           initiallyExpanded={(this.state.editMode || !!this.props.create)}>
           <CardHeader
