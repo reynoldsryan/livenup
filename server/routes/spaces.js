@@ -31,8 +31,9 @@ router.route('/')
     let _humidity = req.body.space.humidity;
     let _temperature = req.body.space.temperature;
     let _plants = req.body.space.space_plants;
+    let _inspirired_plants = req.body.space.inspiried_plants;
 
-    space.add([_space_name, _space_useremail, _space_image, _category, _light, _humidity, _temperature, _plants], function(data){
+    space.add([_space_name, _space_useremail, _space_image, _category, _light, _humidity, _temperature, _plants, _inspirired_plants], function(data){
       res.send(data);
     });
   })
