@@ -74,7 +74,7 @@ class Space extends Component {
     let counter = 100;
     const listItems = this.state.space_plants.map((plant) => {
       return  (<Paper key={counter++} children={<h4><Flower color={Colors.greenA400}/>
-      <strong>  {plant.toUpperCase()}  </strong>
+      <strong>  {plant.name.toUpperCase()}  </strong>
       <span style={{float: 'right'}}><Sun color={Colors.yellowA400}/><Water color={Colors.blueA400}/><Temp color={Colors.deepOrangeA400}/></span></h4>}>
 
         </Paper>);
@@ -106,7 +106,7 @@ class Space extends Component {
     // );
     return (this.state.inspiried_plants.map((plant) => {
       console.log('Mapping :', plant);
-      return (<MenuItem key={counter++} primaryText={plant} onTouchTap={() => {
+      return (<MenuItem key={counter++} primaryText={plant.name} onTouchTap={() => {
 
           this.setState({space_plants: [plant, ...this.state.space_plants,]});
         }}/>);
