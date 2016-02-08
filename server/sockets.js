@@ -1,10 +1,9 @@
-const io = require('./index');
 
-console.log('io in sockets: ', io);
+module.exports = function(io, email) {
 
-module.exports = function(server, email) {
+  console.log('server in sockets: ', io);
 
-  io.sockets.on('connection', (socket) => {
+  io.on('connection', (socket) => {
     console.log('inside connection on server')
     socket.on('connect', () => {
       io.emit('new user connection', email)
@@ -14,8 +13,4 @@ module.exports = function(server, email) {
       io.emit('client side data', data)
     })
   })
-}
-
-module.exports = function(somthing){
-  console.log(somthing);
 }

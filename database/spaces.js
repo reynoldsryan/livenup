@@ -75,6 +75,7 @@ module.exports = {
   remove (id, callback) {
     Space.findOneAndRemove({_id: id}, (err, result) => {
       if(err) console.error(err);
+      //callback should return all of users current spaces
       callback({
         message: "Successfully deleted space",
         data: result
