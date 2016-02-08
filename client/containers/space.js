@@ -125,7 +125,6 @@ class Space extends Component {
       }
       console.log('Mapping :', plant);
       return (<MenuItem key={counter++} primaryText={plant.name} onTouchTap={() => {
-
           this.setState({space_plants: [plant, ...this.state.space_plants,]});
         }}/>);
     }));
@@ -157,7 +156,7 @@ class Space extends Component {
     //     <FlatButton label="Save" onTouchTap={() => this.handleSave} />
     //   );
     // }
-    
+
     let saveBtn;
     if(!this.props.auth) {
       saveBtn = <Login />
@@ -176,23 +175,44 @@ class Space extends Component {
 
   render() {
     return (
-        <Card  onExpandChange={() => this.setState({expanded: !this.state.expanded})} initiallyExpanded={!!this.props.create} onExpandChange={() => {}}>
-          <CardHeader  style={{backgroundColor: Colors.green900}} actAsExpander={true} showExpandableButton={true} children={this.getHeaderButton()}>
-
+        <Card
+          style={padding: '10px'}
+          onExpandChange={() => this.setState({expanded: !this.state.expanded})}
+          initiallyExpanded={(this.state.editMode || !!this.props.create)}>
+          <CardHeader
+            style={{backgroundColor: Colors.green900}}
+            actAsExpander={true}
+            showExpandableButton={true}
+            children={this.getHeaderButton()}>
           </CardHeader>
-          <CardText expandable={true} style={{margin: 'auto 0', display: 'flex'}}  >
-            <LeftNav open={this.state.editMode}  onRequestChange={() => this.setState({editMode: false})}>
-                        <FlatButton style={buttonStyles} label="Done Adding Plants" onTouchTap={() => this.setState({editMode: !this.state.editMode})} />
-                        <TextField value={this.state.space_name} onChange={(e) => {this.setState({space_name: e.target.value})}}/>
-                        {this.state.editMode ? this.displayEditMode(): null}
-                      </LeftNav>
+          <CardText
+            expandable={true}
+            style={{margin: 'auto 0', display: 'flex'}}>
+            <LeftNav
+              open={this.state.editMode}
+              onRequestChange={() => this.setState({editMode: false})}>
+              <FlatButton
+                style={buttonStyles}
+                label="Done Adding Plants"
+                onTouchTap={() => this.setState({editMode: !this.state.editMode})} />
+              <TextField
+                value={this.state.space_name}
+                onChange={(e) => {this.setState({space_name: e.target.value})}}/>
+              {this.state.editMode ? this.displayEditMode(): null}
+            </LeftNav>
             <Divider />
-              <div style={{flex: '1', width: '100%', height: '100%'}}>
-                <image style={{width: '100%'}} src={this.state.image_url}/>
+              <div
+                style={{flex: '1', width: '100%', height: '100%'}}>
+                <image
+                  style={{width: '100%'}} src={this.state.image_url}/>
               </div>
-              <div style={{flex: '2', paddingLeft: '10px'}}>
-                <GridList style={{width: '100%'}} cols={4} padding={10} cellHeight={180}
-                  >
+              <div
+                style={{flex: '2', paddingLeft: '10px'}}>
+                <GridList
+                  style={{width: '100%'}}
+                  cols={4}
+                  padding={10}
+                  cellHeight={180}>
                     {this.renderPlants()}
                 </GridList>
               </div>
