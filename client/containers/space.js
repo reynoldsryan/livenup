@@ -26,6 +26,12 @@ import LeftNav from 'material-ui/lib/left-nav';
 
 import Login from './login';
 
+import GridList from 'material-ui/lib/grid-list/grid-list';
+
+import Plant from '../components/plant';
+
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+
 const iconStyles = {
   margin: '24px',
   float: 'right'
@@ -40,6 +46,7 @@ class Space extends Component {
     super(props);
     if(!this.props.fetchedSpace) {
       this.state = {
+        expanded: false,
         editMode: true,
           image_url: this.props.selectedInspiration.image_url,
           space_name: this.props.selectedInspiration.category,
@@ -52,6 +59,7 @@ class Space extends Component {
       };
     }else {
       this.state = {
+        expanded:false,
         editMode: false,
           image_url: this.props.fetchedSpace.space_image,
           space_name: this.props.fetchedSpace.space_name,
@@ -73,11 +81,18 @@ class Space extends Component {
   renderPlants() {
     let counter = 100;
     const listItems = this.state.space_plants.map((plant) => {
-      return  (<Paper key={counter++} children={<h4><Flower color={Colors.greenA400}/>
-      <strong>  {plant.toUpperCase()}  </strong>
-      <span style={{float: 'right'}}><Sun color={Colors.yellowA400}/><Water color={Colors.blueA400}/><Temp color={Colors.deepOrangeA400}/></span></h4>}>
 
-        </Paper>);
+    // let counter = 100;
+    // const listItems = this.state.space_plants.map((plant) => {
+    //   return  (<Paper key={counter++} children={<h4><Flower color={Colors.greenA400}/>
+    //   <strong>  {plant.toUpperCase()}  </strong>
+    //   <span style={{float: 'right'}}><Sun color={Colors.yellowA400}/><Water color={Colors.blueA400}/><Temp color={Colors.deepOrangeA400}/></span></h4>}>
+    //
+    //     </Paper>);
+      if(typeof plant === 'string') {
+        plant = {name: plant, thumbnail: ''};
+      }
+      return  (<Plant key={counter++} plant={plant}/>);
     });
     console.log('-------listItems',listItems);
     return listItems;
@@ -105,8 +120,11 @@ class Space extends Component {
     //   </Card>
     // );
     return (this.state.inspiried_plants.map((plant) => {
+      if(typeof plant === 'string') {
+        plant = {name: plant, thumbnail: ''};
+      }
       console.log('Mapping :', plant);
-      return (<MenuItem key={counter++} primaryText={plant} onTouchTap={() => {
+      return (<MenuItem key={counter++} primaryText={plant.name} onTouchTap={() => {
 
           this.setState({space_plants: [plant, ...this.state.space_plants,]});
         }}/>);
@@ -139,6 +157,7 @@ class Space extends Component {
     //     <FlatButton label="Save" onTouchTap={() => this.handleSave} />
     //   );
     // }
+    
     let saveBtn;
     if(!this.props.auth) {
       saveBtn = <Login />
@@ -146,7 +165,7 @@ class Space extends Component {
       saveBtn = <FlatButton style={buttonStyles} label="Save" onTouchTap={() => this.handleSave()} />
     }
     return (
-      <div>
+      <div style={{color: Colors.green50}}>
         <h4 style={{display: 'inline-block'}}>{this.state.space_name}</h4>
         {saveBtn}
         <FlatButton style={buttonStyles} label="Edit" onTouchTap={() => this.setState({editMode: !this.state.editMode})} />
@@ -155,43 +174,67 @@ class Space extends Component {
     );
   }
 
-
   render() {
     return (
-      <Card  initiallyExpanded={!!this.props.create} onExpandChange={() => {}}>
-        <CardHeader  style={{backgroundColor: Colors.green300}} avatar={this.state.image_url} showExpandableButton={true} children={this.getHeaderButton()}>
+        <Card  onExpandChange={() => this.setState({expanded: !this.state.expanded})} initiallyExpanded={!!this.props.create} onExpandChange={() => {}}>
+          <CardHeader  style={{backgroundColor: Colors.green900}} actAsExpander={true} showExpandableButton={true} children={this.getHeaderButton()}>
 
-        </CardHeader>
-        <CardText expandable={true} style={{margin: 'auto 0', display: 'flex'}}  >
-
-          <Divider />
+          </CardHeader>
+          <CardText expandable={true} style={{margin: 'auto 0', display: 'flex'}}  >
             <LeftNav open={this.state.editMode}  onRequestChange={() => this.setState({editMode: false})}>
-              <FlatButton style={buttonStyles} label="Done Adding Plants" onTouchTap={() => this.setState({editMode: !this.state.editMode})} />
-              <TextField value={this.state.space_name} onChange={(e) => {this.setState({space_name: e.target.value})}}/>
-              {this.state.editMode ? this.displayEditMode(): null}
-            </LeftNav>
-            <LeftNav  open={this.state.editMode} openRight={true} onRequestChange={() => this.setState({editMode: false})}>
-              <List subheader={<h4>{this.state.space_name}</h4>}>
-                {this.renderPlants()}
-              </List>
-            </LeftNav>
-
-
-            <div style={{flex: '1', width: '100%', height: '100%'}}>
-              <image style={{width: '100%'}} src={this.state.image_url}/>
-                <Paper children={<h4><Sun style={{marginRight: '20px'}} color={Colors.yellowA400}/>Light: {this.state.light}</h4>}/>
-                <Paper children={<h4><Water style={{marginRight: '20px'}} color={Colors.blueA400}/>Humidity: {this.state.humidity}</h4>}/>
-                <Paper children={<h4><Temp style={{marginRight: '20px'}} color={Colors.deepOrangeA400}/>temperture: {this.state.temperature}</h4>}/>
-            </div>
-            <div style={{flex: '2'}}>
-              <Paper style={{width: '100%'}}>
+                        <FlatButton style={buttonStyles} label="Done Adding Plants" onTouchTap={() => this.setState({editMode: !this.state.editMode})} />
+                        <TextField value={this.state.space_name} onChange={(e) => {this.setState({space_name: e.target.value})}}/>
+                        {this.state.editMode ? this.displayEditMode(): null}
+                      </LeftNav>
+            <Divider />
+              <div style={{flex: '1', width: '100%', height: '100%'}}>
+                <image style={{width: '100%'}} src={this.state.image_url}/>
+              </div>
+              <div style={{flex: '2', paddingLeft: '10px'}}>
+                <GridList style={{width: '100%'}} cols={4} padding={10} cellHeight={180}
+                  >
                     {this.renderPlants()}
-              </Paper>
-            </div>
-        </CardText>
-      </Card>
-    );
+                </GridList>
+              </div>
+          </CardText>
+        </Card>);
   }
+  // render() {
+  //   return (
+  //     <Card  initiallyExpanded={!!this.props.create} onExpandChange={() => {}}>
+  //       <CardHeader  style={{backgroundColor: Colors.green900}} actAsExpander={true} showExpandableButton={true} children={this.getHeaderButton()}>
+  //
+  //       </CardHeader>
+  //       <CardText expandable={true} style={{margin: 'auto 0', display: 'flex'}}  >
+  //
+  //         <Divider />
+  //           <LeftNav open={this.state.editMode}  onRequestChange={() => this.setState({editMode: false})}>
+  //             <FlatButton style={buttonStyles} label="Done Adding Plants" onTouchTap={() => this.setState({editMode: !this.state.editMode})} />
+  //             <TextField value={this.state.space_name} onChange={(e) => {this.setState({space_name: e.target.value})}}/>
+  //             {this.state.editMode ? this.displayEditMode(): null}
+  //           </LeftNav>
+  //           <LeftNav  open={this.state.editMode} openRight={true} onRequestChange={() => this.setState({editMode: false})}>
+  //             <List subheader={<h4>{this.state.space_name}</h4>}>
+  //               {this.renderPlants()}
+  //             </List>
+  //           </LeftNav>
+  //
+  //
+  //           <div style={{flex: '1', width: '100%', height: '100%'}}>
+  //             <image style={{width: '100%'}} src={this.state.image_url}/>
+  //               <Paper children={<h4><Sun style={{marginRight: '20px'}} color={Colors.yellowA400}/>Light: {this.state.light}</h4>}/>
+  //               <Paper children={<h4><Water style={{marginRight: '20px'}} color={Colors.blueA400}/>Humidity: {this.state.humidity}</h4>}/>
+  //               <Paper children={<h4><Temp style={{marginRight: '20px'}} color={Colors.deepOrangeA400}/>temperture: {this.state.temperature}</h4>}/>
+  //           </div>
+  //           <div style={{flex: '2'}}>
+  //             <Paper style={{width: '100%'}}>
+  //                   {this.renderPlants()}
+  //             </Paper>
+  //           </div>
+  //       </CardText>
+  //     </Card>
+  //   );
+  // }
 }
 
 
