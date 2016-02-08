@@ -4,8 +4,10 @@ const express = require('express');
 const auth  = require('./../auth');
 const jwt = require('jwt-simple');
 const secret = require('./../utilities');
+const io = require('./../index');
 
 const router = express.Router();
+
 
 router.route('/')
   .post(auth.checkUser, (req, res) => {
@@ -39,6 +41,22 @@ router.route('/hardware')
 
     })
     res.send(_decoded.email);
+
   })
 
 module.exports = router;
+
+
+// router.route('/')
+//   .post(auth.checkUser, (req, res) => {
+//     let userData = req.body.user;
+//     //calls database and saves user profile
+//   })
+//   .put((req, res) => {
+//     let userData = req.body.user.params;
+//     //calls database and modifies a user profile;
+//   })
+//   .delete((req, res) => {
+//     let userName = req.body.user.username;
+//     //calls a database function that deletes the specified user
+//   });
