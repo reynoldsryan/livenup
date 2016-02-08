@@ -28,8 +28,14 @@ export default class SpaceCreator extends Component {
         </h2>
         <div className='two wide column'></div>
       </div>
+      <div className='ui relaxed grid'>
+      <div className='two wide column'></div>
+      <div className='twelve wide column'>
       <Space create={this.handleCreate} selectedInspiration={this.props.selectedInspiration}/>
       </div>
+      <div className='two wide column'></div>
+      </div>
+    </div>
     );
   }
 }
