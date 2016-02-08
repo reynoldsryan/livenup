@@ -4,41 +4,33 @@ const express = require('express');
 const auth  = require('./../auth');
 const jwt = require('jwt-simple');
 const secret = require('./../utilities');
-
+const socket = require('./../sockets');
 const router = express.Router();
 
 router.route('/')
-  .post(auth.checkUser, (req, res) => {
-    let userData = req.body.user;
-    //calls database and saves user profile
-  })
-  .put((req, res) => {
-    let userData = req.body.user.params;
-    //calls database and modifies a user profile;
-  })
-  .delete((req, res) => {
-    let userName = req.body.user.username;
-    //calls a database function that deletes the specified user
-  });
+  .get((req, res) => {
+    //console.log('req.app.ioMiddleware in users: ', req.app.ioMiddleware);
+    // let _token = req.headers.token;
+    // let _decodedEmail = jwt.decode(_token, secret.salt).email;
+    let _decodedEmail = 'genevieve@email.com';
 
-router.route('/hardware')
-  .post((req, res) => {
-    let _token = req.headers.token;
-    let _decoded = jwt.decode(_token, secret.salt);
+    socket(req.app.ioMiddleware, _decodedEmail);
 
-    let options = {
-       host: 'blouhm url',
-       port: 8070,
-       path: '/user/path/something',
-       method: 'GET',
-       headers: { 'Content-Type': 'application/x-www-form-urlencoded'},
-       body: {'userEmail': _decoded.email}
-    }
-
-    let request = http.request(options, (res) => {
-
-    })
-    res.send(_decoded.email);
   })
 
 module.exports = router;
+
+
+// router.route('/')
+//   .post(auth.checkUser, (req, res) => {
+//     let userData = req.body.user;
+//     //calls database and saves user profile
+//   })
+//   .put((req, res) => {
+//     let userData = req.body.user.params;
+//     //calls database and modifies a user profile;
+//   })
+//   .delete((req, res) => {
+//     let userName = req.body.user.username;
+//     //calls a database function that deletes the specified user
+//   });
