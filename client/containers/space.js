@@ -81,6 +81,9 @@ class Space extends Component {
   renderPlants() {
     let counter = 100;
     const listItems = this.state.space_plants.map((plant) => {
+      return  (<Paper key={counter++} children={<h4><Flower color={Colors.greenA400}/>
+      <strong>  {plant.name.toUpperCase()}  </strong>
+      <span style={{float: 'right'}}><Sun color={Colors.yellowA400}/><Water color={Colors.blueA400}/><Temp color={Colors.deepOrangeA400}/></span></h4>}>
 
     // let counter = 100;
     // const listItems = this.state.space_plants.map((plant) => {

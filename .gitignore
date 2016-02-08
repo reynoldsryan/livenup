@@ -1,6 +1,5 @@
 node_modules/
 npm-debug.log
-bundle.js
 client/api_keys/
 .DS_Store
 client/assets/images/Originals
