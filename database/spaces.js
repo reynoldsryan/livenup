@@ -11,7 +11,7 @@ const spaceSchema = new mongoose.Schema( {
   humidity: {type: String},
   tempurature: {type: String},
   space_plants: {type: Array},
-  inspiried_plants: {type: Array},
+  inspiration_plants: {type: Array},
 });
 
 const Space = mongoose.model('user_spaces', spaceSchema);
@@ -34,7 +34,7 @@ module.exports = {
       humidity: properties[5],
       temperature: properties[6],
       space_plants: properties[7],
-      inspiried_plants: properties[8]
+      inspiration_plants: properties[8]
     });
 
     space.save((err, result) => {
@@ -52,6 +52,7 @@ module.exports = {
       if(!result) {
         callback({message: "Space with " + id + " not found"});
       }
+      console.log('result in database/spaces line 55', result);
       result.space_name = properties[0] || result.space_name;
       result.space_useremail = properties[1] || result.space_useremail;
       result.space_image = properties[2] || result.space_image;
@@ -60,6 +61,7 @@ module.exports = {
       result.humidity = properties[5] || result.humidity;
       result.temperature = properties[6] || result.temperature;
       result.space_plants = properties[7] || result.space_plants;
+      result.inspiration_plants = properties[8] || result.inspiration_plants;
 
       result.save((err) => {
         if(err) console.error(err);
@@ -74,6 +76,7 @@ module.exports = {
   remove (id, callback) {
     Space.findOneAndRemove({_id: id}, (err, result) => {
       if(err) console.error(err);
+      //callback should return all of users current spaces
       callback({
         message: "Successfully deleted space",
         data: result

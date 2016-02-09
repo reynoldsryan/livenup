@@ -43,6 +43,11 @@ const buttonStyles = {
   float: 'right'
 };
 
+const whiteButtonStyles = {
+  float: 'right',
+  color: 'white'
+};
+
 class Space extends Component {
   constructor(props) {
     super(props);
@@ -63,6 +68,7 @@ class Space extends Component {
       this.state = {
         expanded:false,
         editMode: false,
+          id: this.props.fetchedSpace._id,
           image_url: this.props.fetchedSpace.space_image,
           space_name: this.props.fetchedSpace.space_name,
           category: this.props.fetchedSpace.category,
@@ -84,8 +90,11 @@ class Space extends Component {
   renderPlants() {
     let counter = 100;
     const listItems = this.state.space_plants.map((plant) => {
+      if(typeof plant === 'object') {
+        plant.name = plant.name.charAt(0).toUpperCase() + plant.name.slice(1);
       if(typeof plant === 'string') {
-        plant = {name: plant, thumbnail: ''};
+
+        plant = {name: plant.charAt(0).toUpperCase() + plant.slice(1), thumbnail: ''};
       }
       return  (<Plant key={counter++} plant={plant}/>);
     });
@@ -93,22 +102,27 @@ class Space extends Component {
     return listItems;
   }
 
-  //Display the edit mode
+
   displayEditMode() {
     let counter = 0;
     return (this.state.inspiried_plants.map((plant) => {
+      if(typeof plant === 'object') {
+        plant.name = plant.name.charAt(0).toUpperCase() + plant.name.slice(1);
+      }
       if(typeof plant === 'string') {
-        plant = {name: plant, thumbnail: ''};
+
+        plant = {name: plant.charAt(0).toUpperCase() + plant.slice(1), thumbnail: ''};
       }
       console.log('Mapping :', plant);
       return (<ListItem key={counter++} leftAvatar={<Avatar src={plant.thumbnail} />} primaryText={plant.name} onTouchTap={() => {
-          this.setState({space_plants: [plant, ...this.state.space_plants,]});
+          this.setState({space_plants: [plant, ...this.state.space_plants]});
         }}/>);
     }));
   }
 
   handleSave() {
     const space = {
+      id: this.state.id,
       image_url: this.state.image_url,
       space_name: this.state.space_name,
       category: this.state.category,
@@ -122,7 +136,7 @@ class Space extends Component {
     if(!this.props.selectedInspiration) {
       return this.props.updateUserSpace(space);
     }
-    console.log('creating space: ', space);
+    console.log('creating space: ',space );
     this.props.create(space);
   }
 
@@ -152,7 +166,7 @@ class Space extends Component {
     return (
       <div style={{color: Colors.green50}}>
         <h4 style={{display: 'inline-block'}}>{this.state.space_name}</h4>
-        <FlatButton style={buttonStyles} label="Edit" onTouchTap={() => this.setState({editMode: !this.state.editMode})} />
+        <FlatButton style={whiteButtonStyles} label="Edit" onTouchTap={() => this.setState({editMode: !this.state.editMode})} />
       </div>
 
     );
@@ -160,11 +174,11 @@ class Space extends Component {
 
   render() {
     return (
+      <div>
         <Card
-          style={{padding: '10px'}}
-          onExpandChange={() => this.setState({expanded: !this.state.expanded})}>
+          style={{border: '2px solid black', boxShadow: 'none'}}>
           <CardHeader
-            style={{backgroundColor: Colors.green900}}
+            style={{backgroundColor: Colors.green900, border: 'solid black', borderWidth: '0px 0px 2px 0px', color: 'white'}}
             children={this.getHeaderButton()}>
           </CardHeader>
           <CardText
@@ -172,9 +186,11 @@ class Space extends Component {
             style={{margin: 'auto 0', display: 'flex'}}>
             <LeftNav
               styles={{root : { backgroundColor: 'blue'}}}
+              openRight={true}
               open={this.state.editMode}
+              openRight={true}
               onRequestChange={() => this.setState({editMode: false})}>
-              <div style={{backgroundColor: Colors.lightGreen900}}>{this.props.auth ? this.getSaveButton() : <LogInOut /> }</div>
+              <div style={{backgroundColor: Colors.green900}}>{this.props.auth ? this.getSaveButton() : <LogInOut /> }</div>
               <TextField
                 floatingLabelText="Edit Space Name"
                 value={this.state.space_name}
@@ -193,17 +209,17 @@ class Space extends Component {
                 style={{flex: '2', paddingLeft: '10px'}}>
                 <GridList
                   style={{width: '100%'}}
-                  cols={4}
+                  cols={3}
                   padding={10}
-                  cellHeight={180}>
+                  cellHeight={150}>
                     {this.renderPlants()}
                 </GridList>
               </div>
           </CardText>
-          <CardActions>
-          </CardActions>
-        </Card>);
-    }
+        </Card>
+      <div style={{marginBottom: '20px'}}></div>
+    </div>);
+  }
 }
 
 

@@ -41,6 +41,7 @@ router.route('/')
     let _token = req.headers.token;
     let _decoded = jwt.decode(_token, secret.salt);
 
+    console.log('req.body inside of /spaces.put',req.body);
     let _id = req.body.space.id;
     let _space_name = req.body.space.space_name;
     let _space_useremail = _decoded.email;
