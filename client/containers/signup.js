@@ -55,7 +55,6 @@ class SignupForm extends Component {
         type="submit"
         label="Submit"
         primary={true}
-        keyboardFocused={true}
         onTouchTap={this.onFormSubmit} />
     ];
 
