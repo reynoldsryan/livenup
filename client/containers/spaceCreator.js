@@ -21,21 +21,21 @@ export default class SpaceCreator extends Component {
   render() {
     return (
       <div>
-      <div className='sixteen column row'>
-        <div className='two wide column'></div>
-        <h2 className='twelve wide column, space-heading'>
-          ...bring it to life.
-        </h2>
-        <div className='two wide column'></div>
+        <div className='sixteen column row'>
+          <div className='two wide column'></div>
+          <h2 className='twelve wide column, space-heading'>
+            ...bring it to life.
+          </h2>
+          <div className='two wide column'></div>
+        </div>
+        <div className='ui relaxed grid'>
+          <div className='two wide column'></div>
+          <div className='twelve wide column'>
+            <Space create={this.handleCreate} selectedInspiration={this.props.selectedInspiration}/>
+          </div>
+          <div className='two wide column'></div>
+        </div>
       </div>
-      <div className='ui relaxed grid'>
-      <div className='two wide column'></div>
-      <div className='twelve wide column'>
-      <Space create={this.handleCreate} selectedInspiration={this.props.selectedInspiration}/>
-      </div>
-      <div className='two wide column'></div>
-      </div>
-    </div>
     );
   }
 }
