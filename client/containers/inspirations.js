@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import GridList from 'material-ui/lib/grid-list/grid-list';
 import GridTile from 'material-ui/lib/grid-list/grid-tile';
-//import StarBorder from 'material-ui/svg-icons/toggle/star-border';
+
 import IconButton from 'material-ui/lib/icon-button';
 import { fetchInspirations, selectInspiration } from '../actions/inspiration_actions';
 import routeActions, { push } from 'react-router-redux';

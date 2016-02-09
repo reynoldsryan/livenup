@@ -3,7 +3,7 @@ import { Route, IndexRoute } from 'react-router';
 
 import App from './components/app';
 import Index from './components/index';
-import MySpaces from './components/myspaces';
+
 import SpaceCreator  from "./containers/spaceCreator";
 import Login from './containers/login';
 import Signup from './containers/signup';
