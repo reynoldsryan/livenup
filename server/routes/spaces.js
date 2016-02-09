@@ -56,10 +56,14 @@ router.route('/')
     });
   })
   .delete(auth.checkUser, (req, res) => {
-    console.log('ln 39: in route/spaces DELETE');
-    let _id = req.query.id;
+    let _token = req.headers.token;
+    let _decoded = jwt.decode(_token, secret.salt);
 
-    space.remove(_id, function(data) {
+    let _id = req.query.id;
+    let _email = _decoded.email;
+
+
+    space.remove(_id, _email, function(data) {
       res.send(data);
     });
   });
