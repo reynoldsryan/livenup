@@ -8,9 +8,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import Colors from 'material-ui/lib/styles/colors';
 
 const styles = {
-  root: {
-    backgroundColor: Colors.green900
-  }
+  appBar: {}
 };
 
 class NavBar extends Component {
@@ -22,11 +20,15 @@ class NavBar extends Component {
   navBarColor() {
     console.log('this.props.atHome in navBarColor is ', this.props.atHome);
     if (this.props.atHome) {
-      console.log('styles.root.backgroundColor in if is ', styles.root.backgroundColor);
-      styles.root.backgroundColor = 'rgba(0, 0, 0, 0)';
+      console.log('styles.appBar.backgroundColor in if is ', styles.appBar.backgroundColor);
+      styles.appBar.backgroundColor = 'rgba(0, 0, 0, 0)';
+      styles.appBar.border = 'none';
+      styles.appBar.borderWidth = '0px';
     } else {
-      console.log('styles.root.backgroundColor in else is ', styles.root.backgroundColor);
-      styles.root.backgroundColor = Colors.green900;
+      console.log('styles.appBar.backgroundColor in else is ', styles.appBar.backgroundColor);
+      styles.appBar.backgroundColor = Colors.green900;
+      styles.appBar.border = 'solid black';
+      styles.appBar.borderWidth = '0px 0px 2px 0px';
     }
   }
 
@@ -34,14 +36,14 @@ class NavBar extends Component {
 
     this.navBarColor();
 
-    console.log('styles.root.backgroundColor is ', styles.root.backgroundColor);
+    console.log('styles.appBar.backgroundColor is ', styles.appBar.backgroundColor);
     console.log('atHome in NavBar is ', this.props.atHome);
     console.log('navBarColor is ', this.navBarColor());
 
     return (
       <AppBar
         className = 'nav-bar'
-        style = {styles.root}
+        style = {styles.appBar}
         showMenuIconButton = { false }
         title ={<span style={{cursor: 'pointer'}}>LivenUp</span>}
         onTitleTouchTap = { () => this.props.push('/') }
