@@ -20,13 +20,28 @@ class MyGreenSpaces extends Component {
   render() {
     let counter = 0;
     return (
-      <Paper>
+      <div>
+      <div className='sixteen column row'>
+        <div className='two wide column'></div>
+        <h2 className='twelve wide column, space-heading'>
+          Water = life. Once a week.
+        </h2>
+        <div className='two wide column'></div>
+      </div>
+      <div className='ui relaxed grid'>
+        <div className='two wide column'></div>
+        <div className='twelve wide column'>
+          <Paper style={{boxShadow: 'none'}}>
 
-        {this.props.user_spaces.map((userspace, i) => {
-          console.log(`Userspace: `,userspace,` at ${i}`);
-          return <Space key={counter++} fetchedSpace={userspace}/>
-        })}
-      </Paper>
+            {this.props.user_spaces.map((userspace, i) => {
+              console.log(`Userspace: `,userspace,` at ${i}`);
+              return <Space key={counter++} fetchedSpace={userspace}/>
+            })}
+          </Paper>
+        </div>
+        <div className='two wide column'></div>
+      </div>
+      </div>
     );
   }
 }
