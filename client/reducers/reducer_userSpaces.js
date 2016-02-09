@@ -13,7 +13,7 @@ export default function(state = [], action) {
       if(action.payload === undefined) {
         //basic error handling
         console.error('++++Payload in reducer_userSpaces for action CREATE_SPACE is undefined');
-        return state.slice();
+        return state;
       }
 
       return [...state, action.payload.data];
@@ -22,7 +22,7 @@ export default function(state = [], action) {
       if(action.payload === undefined) {
         //basic error handling
         console.error('++++Payload in reducer_userSpaces for action CREATE_SPACE is undefined');
-        return state.slice();
+        return state;
       }
 
       return action.payload.data;
