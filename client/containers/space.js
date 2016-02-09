@@ -68,6 +68,7 @@ class Space extends Component {
       this.state = {
         expanded:false,
         editMode: false,
+          id: this.props.fetchedSpace._id,
           image_url: this.props.fetchedSpace.space_image,
           space_name: this.props.fetchedSpace.space_name,
           category: this.props.fetchedSpace.category,
@@ -115,13 +116,14 @@ class Space extends Component {
       }
       console.log('Mapping :', plant);
       return (<ListItem key={counter++} leftAvatar={<Avatar src={plant.thumbnail} />} primaryText={plant.name} onTouchTap={() => {
-          this.setState({space_plants: [plant, ...this.state.space_plants,]});
+          this.setState({space_plants: [plant, ...this.state.space_plants]});
         }}/>);
     }));
   }
 
   handleSave() {
     const space = {
+      id: this.state.id,
       image_url: this.state.image_url,
       space_name: this.state.space_name,
       category: this.state.category,
@@ -135,7 +137,7 @@ class Space extends Component {
     if(!this.props.selectedInspiration) {
       return this.props.updateUserSpace(space);
     }
-    console.log('creating space: ', space);
+    console.log('creating space: ',space );
     this.props.create(space);
   }
 
@@ -165,18 +167,17 @@ class Space extends Component {
     return (
       <div style={{color: Colors.green50}}>
         <h4 style={{display: 'inline-block'}}>{this.state.space_name}</h4>
-        <FlatButton style={whiteButtonStyles} label="Edit" onTouchTap={() => this.setState({editMode: !this.state.editMode})} />.setState({editMode: !this.state.editMode})} />
+        <FlatButton style={whiteButtonStyles} label="Edit" onTouchTap={() => this.setState({editMode: !this.state.editMode})} />
       </div>
 
     );
   }
-}
 
   render() {
     return (
       <div>
         <Card
-          style={{border: '2px solid black', boxShadow: 'none'}}
+          style={{border: '2px solid black', boxShadow: 'none'}}>
           <CardHeader
             style={{backgroundColor: Colors.green900, border: 'solid black', borderWidth: '0px 0px 2px 0px', color: 'white'}}
             children={this.getHeaderButton()}>
@@ -190,10 +191,6 @@ class Space extends Component {
               open={this.state.editMode}
               openRight={true}
               onRequestChange={() => this.setState({editMode: false})}>
-              <FlatButton
-                style={buttonStyles}
-                label="Done"
-                onTouchTap={() => this.setState({editMode: !this.state.editMode})} />
               <div style={{backgroundColor: Colors.green900}}>{this.props.auth ? this.getSaveButton() : <LogInOut /> }</div>
               <TextField
                 floatingLabelText="Edit Space Name"
