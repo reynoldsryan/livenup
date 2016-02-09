@@ -1,7 +1,7 @@
 import React , { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { updatedSpace } from '../actions/creator_actions.js';
+import { updateUserSpace } from '../actions/creator_actions.js';
 
 import Card from 'material-ui/lib/card/card';
 import CardActions from 'material-ui/lib/card/card-actions';
@@ -14,6 +14,7 @@ import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
 import Paper from 'material-ui/lib/paper';
 import Divider from 'material-ui/lib/divider';
+import Avatar from 'material-ui/lib/avatar';
 
 import Colors from 'material-ui/lib/styles/colors';
 import Sun from 'material-ui/lib/svg-icons/image/brightness-5';
@@ -25,6 +26,7 @@ import LeftNav from 'material-ui/lib/left-nav';
 // import MenuItem from 'material-ui/lib/menus/menu-item';
 
 import Login from './login';
+import LogInOut from '../components/logInOut';
 
 import GridList from 'material-ui/lib/grid-list/grid-list';
 
@@ -68,12 +70,13 @@ class Space extends Component {
           humidity: this.props.fetchedSpace.humidity,
           temperature: this.props.fetchedSpace.temperature,
           space_plants: this.props.fetchedSpace.space_plants,
-        inspiried_plants: this.props.fetchedSpace.space_plants
+        inspiried_plants: this.props.fetchedSpace.inspiried_plants
     }
 
-      this.renderPlants.bind(this);
-      this.getHeaderButton.bind(this);
-      this.displayEditMode.bind(this);
+      this.renderPlants = this.renderPlants.bind(this);
+      this.getHeaderButton = this.getHeaderButton.bind(this);
+      this.displayEditMode = this.displayEditMode.bind(this);
+      this.getSaveButton = this.getSaveButton.bind(this);
     }
 
   }
@@ -81,14 +84,6 @@ class Space extends Component {
   renderPlants() {
     let counter = 100;
     const listItems = this.state.space_plants.map((plant) => {
-
-    // let counter = 100;
-    // const listItems = this.state.space_plants.map((plant) => {
-    //   return  (<Paper key={counter++} children={<h4><Flower color={Colors.greenA400}/>
-    //   <strong>  {plant.toUpperCase()}  </strong>
-    //   <span style={{float: 'right'}}><Sun color={Colors.yellowA400}/><Water color={Colors.blueA400}/><Temp color={Colors.deepOrangeA400}/></span></h4>}>
-    //
-    //     </Paper>);
       if(typeof plant === 'string') {
         plant = {name: plant, thumbnail: ''};
       }
@@ -101,30 +96,12 @@ class Space extends Component {
   //Display the edit mode
   displayEditMode() {
     let counter = 0;
-    console.log('---------------space ', this.state);
-    // return (
-    //   <Card>
-    //     <TextField value={this.state.space_name} onChange={(e) => {
-    //         this.setState({space_name: e.target.value})
-    //       }
-    //     } />
-    //   <List subheader={<h4>Click a plant to add it to your space</h4>}>
-    //       {this.state.inspiried_plants.map((plant) => {
-    //         console.log('Mapping :', plant);
-    //         return (<ListItem key={counter++} primaryText={plant} onTouchTap={() => {
-    //
-    //             this.setState({space_plants: [plant, ...this.state.space_plants,]});
-    //           }}/>);
-    //       })}
-    //     </List>
-    //   </Card>
-    // );
     return (this.state.inspiried_plants.map((plant) => {
       if(typeof plant === 'string') {
         plant = {name: plant, thumbnail: ''};
       }
       console.log('Mapping :', plant);
-      return (<MenuItem key={counter++} primaryText={plant.name} onTouchTap={() => {
+      return (<ListItem key={counter++} leftAvatar={<Avatar src={plant.thumbnail} />} primaryText={plant.name} onTouchTap={() => {
           this.setState({space_plants: [plant, ...this.state.space_plants,]});
         }}/>);
     }));
@@ -143,34 +120,38 @@ class Space extends Component {
     };
 
     if(!this.props.selectedInspiration) {
-      return this.props.updatedSpace(space);
+      return this.props.updateUserSpace(space);
     }
     console.log('creating space: ', space);
     this.props.create(space);
   }
 
   //display edit or save button depending on current editMode state
-  getHeaderButton() {
-    // if(!this.state.editMode){
-    //   return (
-    //     <FlatButton label="Save" onTouchTap={() => this.handleSave} />
-    //   );
-    // }
-
+  getSaveButton() {
     let saveBtn;
     if(!this.props.auth) {
-      saveBtn = <Login />
+      return (<div>
+        <FlatButton style={buttonStyles} disabled={true} style={buttonStyles} primary={true} label="Save"  />
+      </div>);
     }else {
       if(!this.props.selectedInspiration){
-        saveBtn = <FlatButton style={buttonStyles} label="Update" onTouchTap={() => this.handleSave()} />
+        saveBtn = <FlatButton style={{float: 'left'}} primary={true} label="Update" onTouchTap={() => {
+            this.handleSave();
+            this.setState({editMode: !this.state.editMode});
+          }} />
       }else {
-        saveBtn = <FlatButton style={buttonStyles} label="Save" onTouchTap={() => this.handleSave()} />
+        saveBtn = <FlatButton style={{float: 'left'}} primary={true} label="Save" onTouchTap={() => {
+            this.handleSave();
+            this.setState({editMode: !this.state.editMode});
+          }} />
       }
     }
+    return saveBtn;
+  }
+  getHeaderButton() {
     return (
       <div style={{color: Colors.green50}}>
         <h4 style={{display: 'inline-block'}}>{this.state.space_name}</h4>
-        {saveBtn}
         <FlatButton style={buttonStyles} label="Edit" onTouchTap={() => this.setState({editMode: !this.state.editMode})} />
       </div>
 
@@ -181,28 +162,26 @@ class Space extends Component {
     return (
         <Card
           style={{padding: '10px'}}
-          onExpandChange={() => this.setState({expanded: !this.state.expanded})}
-          initiallyExpanded={(this.state.editMode || !!this.props.create)}>
+          onExpandChange={() => this.setState({expanded: !this.state.expanded})}>
           <CardHeader
             style={{backgroundColor: Colors.green900}}
-            actAsExpander={true}
-            showExpandableButton={true}
             children={this.getHeaderButton()}>
           </CardHeader>
           <CardText
-            expandable={true}
+
             style={{margin: 'auto 0', display: 'flex'}}>
             <LeftNav
+              styles={{root : { backgroundColor: 'blue'}}}
               open={this.state.editMode}
               onRequestChange={() => this.setState({editMode: false})}>
-              <FlatButton
-                style={buttonStyles}
-                label="Done Adding Plants"
-                onTouchTap={() => this.setState({editMode: !this.state.editMode})} />
+              <div style={{backgroundColor: Colors.lightGreen900}}>{this.props.auth ? this.getSaveButton() : <LogInOut /> }</div>
               <TextField
+                floatingLabelText="Edit Space Name"
                 value={this.state.space_name}
                 onChange={(e) => {this.setState({space_name: e.target.value})}}/>
-              {this.state.editMode ? this.displayEditMode(): null}
+              <List subheader="Add plants to your space">
+                {this.state.editMode ? this.displayEditMode(): null}
+              </List>
             </LeftNav>
             <Divider />
               <div
@@ -221,49 +200,15 @@ class Space extends Component {
                 </GridList>
               </div>
           </CardText>
+          <CardActions>
+          </CardActions>
         </Card>);
-  }
-  // render() {
-  //   return (
-  //     <Card  initiallyExpanded={!!this.props.create} onExpandChange={() => {}}>
-  //       <CardHeader  style={{backgroundColor: Colors.green900}} actAsExpander={true} showExpandableButton={true} children={this.getHeaderButton()}>
-  //
-  //       </CardHeader>
-  //       <CardText expandable={true} style={{margin: 'auto 0', display: 'flex'}}  >
-  //
-  //         <Divider />
-  //           <LeftNav open={this.state.editMode}  onRequestChange={() => this.setState({editMode: false})}>
-  //             <FlatButton style={buttonStyles} label="Done Adding Plants" onTouchTap={() => this.setState({editMode: !this.state.editMode})} />
-  //             <TextField value={this.state.space_name} onChange={(e) => {this.setState({space_name: e.target.value})}}/>
-  //             {this.state.editMode ? this.displayEditMode(): null}
-  //           </LeftNav>
-  //           <LeftNav  open={this.state.editMode} openRight={true} onRequestChange={() => this.setState({editMode: false})}>
-  //             <List subheader={<h4>{this.state.space_name}</h4>}>
-  //               {this.renderPlants()}
-  //             </List>
-  //           </LeftNav>
-  //
-  //
-  //           <div style={{flex: '1', width: '100%', height: '100%'}}>
-  //             <image style={{width: '100%'}} src={this.state.image_url}/>
-  //               <Paper children={<h4><Sun style={{marginRight: '20px'}} color={Colors.yellowA400}/>Light: {this.state.light}</h4>}/>
-  //               <Paper children={<h4><Water style={{marginRight: '20px'}} color={Colors.blueA400}/>Humidity: {this.state.humidity}</h4>}/>
-  //               <Paper children={<h4><Temp style={{marginRight: '20px'}} color={Colors.deepOrangeA400}/>temperture: {this.state.temperature}</h4>}/>
-  //           </div>
-  //           <div style={{flex: '2'}}>
-  //             <Paper style={{width: '100%'}}>
-  //                   {this.renderPlants()}
-  //             </Paper>
-  //           </div>
-  //       </CardText>
-  //     </Card>
-  //   );
-  // }
+    }
 }
 
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ updatedSpace }, dispatch);
+  return bindActionCreators({ updateUserSpace }, dispatch);
 }
 
 function mapStateToProps(state) {
