@@ -186,6 +186,7 @@ class Space extends Component {
             style={{margin: 'auto 0', display: 'flex'}}>
             <LeftNav
               styles={{root : { backgroundColor: 'blue'}}}
+              openRight={true}
               open={this.state.editMode}
               openRight={true}
               onRequestChange={() => this.setState({editMode: false})}>
