@@ -92,6 +92,7 @@ class Space extends Component {
     const listItems = this.state.space_plants.map((plant) => {
       if(typeof plant === 'object') {
         plant.name = plant.name.charAt(0).toUpperCase() + plant.name.slice(1);
+      }
       if(typeof plant === 'string') {
 
         plant = {name: plant.charAt(0).toUpperCase() + plant.slice(1), thumbnail: ''};
