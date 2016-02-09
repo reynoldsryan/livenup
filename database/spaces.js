@@ -72,14 +72,15 @@ module.exports = {
     });
   },
 
-  remove (id, callback) {
-    Space.findOneAndRemove({_id: id}, (err, result) => {
+  remove (id, email, callback) {
+    Space.findOneAndRemove({_id: id}, (err) => {
       if(err) console.error(err);
-      //callback should return all of users current spaces
+    });
+    this.find(email, function(result){
       callback({
         message: "Successfully deleted space",
         data: result
       });
-    });
+    })
   }
 };
